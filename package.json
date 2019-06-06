@@ -1,0 +1,60 @@
+{
+  "name": "@protonapp/barchart-component",
+  "version": "0.0.1",
+  "description": "Bar Chart Component for Proton",
+  "main": "index.js",
+  "scripts": {
+    "build": "proton build",
+    "publish": "proton publish",
+    "copy": "rm -rf ../../previewer/node_modules/@protonapp/stripe-component/src/ && cp -r src ../../previewer/node_modules/@protonapp/stripe-component/src && cp -r index.js ../../previewer/node_modules/@protonapp/stripe-component/index.js"
+  },
+  "author": "Jeremy Blalock",
+  "license": "ISC",
+  "proton": {
+    "displayName": "Bar Chart Component",
+    "components": [
+      {
+        "name": "BarChart",
+        "manifest": "./src/BarChart/BarChartManifest.json"
+      }
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@protonapp/proton-cli": "^0.0.20",
+    "@storybook/addon-actions": "^4.0.2",
+    "@storybook/addon-links": "^4.0.2",
+    "@storybook/addons": "^4.0.2",
+    "@storybook/react": "^4.0.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-runtime": "^6.26.0",
+    "css-loader": "^1.0.0",
+    "react": "^16.5.2",
+    "react-art": "^16.6.0",
+    "react-dom": "^16.5.2",
+    "react-native-web": "^0.9.5",
+    "regenerator-runtime": "^0.12.1",
+    "style-loader": "^0.23.1"
+  },
+  "dependencies": {
+    "@protonapp/react-native-material-ui": "^2.0.2",
+    "axios": "^0.18.0",
+    "color": "^3.1.0",
+    "qs": "^6.6.0",
+    "react-native-credit-card": "^0.1.9",
+    "react-native-hyperlink": "^0.0.14",
+    "react-native-hyperlinked-text": "^1.0.1",
+    "react-native-svg": "^9.3.3",
+    "react-native-svg-uri": "^1.2.3",
+    "react-native-vector-icons": "^6.4.0",
+    "react-vis": "^1.11.7"
+  }
+}

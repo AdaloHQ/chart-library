@@ -1,0 +1,66 @@
+{
+  "displayName": "Bar Chart",
+  "icon": "./icon.png",
+  "defaultWidth": 343,
+  "defaultHeight": 113,
+  "component": "./BarChart.js",
+  "props": [
+    {
+      "name": "barchartdesc",
+      "displayName": "What is this a chart of?",
+      "type": "list"
+    },
+    {
+      "name":"yaxis",
+      "displayName": "Y Axis",
+      "type":"number",
+      "default":0
+    },
+    {
+      "name":"xaxis",
+      "displayName": "X Axis",
+      "type":"text",
+      "default": "",
+      "role": "listItem",
+      "reference":"barchartdesc"
+    },
+    {
+      "name":"baraction",
+      "displayName":"Bar Action",
+      "type": "action"
+    }
+  ],"childComponents": [
+    {
+      "name": "barchartstyles",
+      "displayName": "Styles",
+      "props": [
+        {
+          "name": "chart_title",
+          "displayName": "Chart Title",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "name":"y_axis_label",
+          "displayName": "Y Axis Label",
+          "type":"text",
+          "default":""
+        },
+        {
+          "name": "x_axis_label",
+          "displayName": "X Axis Label",
+          "type":"text",
+          "default":""
+        },
+        {
+          "name": "bar_color",
+          "displayName": "Bar Color",
+          "type": "color",
+          "default": ""
+        }
+      ]
+    }
+  
+  ]
+}
+

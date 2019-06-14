@@ -6,7 +6,8 @@
   "scripts": {
     "build": "proton build",
     "publish": "proton publish",
-    "copy": "rm -rf ../../previewer/node_modules/@protonapp/stripe-component/src/ && cp -r src ../../previewer/node_modules/@protonapp/stripe-component/src && cp -r index.js ../../previewer/node_modules/@protonapp/stripe-component/index.js"
+    "copy": "rm -rf ../../previewer/node_modules/@protonapp/stripe-component/src/ && cp -r src ../../previewer/node_modules/@protonapp/stripe-component/src && cp -r index.js ../../previewer/node_modules/@protonapp/stripe-component/index.js",
+    "devlocal": "FOUNDRY_DEV_SERVER=http://localhost:3035 foundry dev"
   },
   "author": "Jeremy Blalock",
   "license": "ISC",
@@ -28,7 +29,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "@protonapp/proton-cli": "^0.0.20",
+    "@protonapp/proton-cli": "^0.0.23",
     "@storybook/addon-actions": "^4.0.2",
     "@storybook/addon-links": "^4.0.2",
     "@storybook/addons": "^4.0.2",
@@ -49,12 +50,15 @@
     "axios": "^0.18.0",
     "color": "^3.1.0",
     "qs": "^6.6.0",
+    "react-measure": "^2.3.0",
+    "react-native": "^0.59.9",
     "react-native-credit-card": "^0.1.9",
     "react-native-hyperlink": "^0.0.14",
     "react-native-hyperlinked-text": "^1.0.1",
-    "react-native-svg": "^9.3.3",
+    "react-native-svg": "^9.4.0",
     "react-native-svg-uri": "^1.2.3",
     "react-native-vector-icons": "^6.4.0",
-    "react-vis": "^1.11.7"
+    "resize-observer-polyfill": "^1.5.1",
+    "victory-native": "^32.0.2"
   }
 }

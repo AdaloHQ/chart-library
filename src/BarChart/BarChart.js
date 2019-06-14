@@ -1,5 +1,5 @@
 //import Icon from "./_laska_/Icon";
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import {
   ActivityIndicator,
@@ -13,71 +13,182 @@ import {
   Dimensions,
 } from 'react-native'
 
-//import {BarChart} from 'react-native-chart-kit'
-//import '../../node_modules/react-vis/dist/style.css'
-import{XYPlot, VerticalBarSeries} from 'react-vis'
+import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryLabel, Bar, VictoryPortal, } from "victory-native"
 
-const data = [
-  {x: 0, y: 8},
-  {x: 1, y: 5},
-  {x: 2, y: 4},
-  {x: 3, y: 9},
-  {x: 4, y: 1},
-  {x: 5, y: 7},
-  {x: 6, y: 6},
-  {x: 7, y: 3},
-  {x: 8, y: 2},
-  {x: 9, y: 0}
-];
+
+
+
 
 export default class BarChartComponent extends Component {
-  render(){
-    console.log(this.props)
-    return(
-      <XYPlot height={200} width={200} color={rgb2hex(this.props.barchartstyles.bar_color)}>
-        <VerticalBarSeries data={data}/>
-      </XYPlot>
-    )
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+      width: undefined,
+      height: undefined
+    }
+    console.log("COnstructor width: ", this.state.width)
   }
-    // render() {
 
-    //   let data = {
-    //     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    //     datasets: [{
-    //       data: [ 20, 45, 28, 80, 99, 43 ]
-    //     }]
-    //   }
-    //   let chartConfig = {
-    //     backgroundGradientFrom: '#1E2923',
-    //     backgroundGradientTo: '#08130D',
-    //     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    //     strokeWidth: 2 // optional, default 3
-    //   }
-    //   console.log(this.props.barchartstyles.bar_color)
+  // componentDidMount() {
+  //   this.setState({
+  //     chartWidth: window.innerWidth
+  //   });
+  //   window.addEventListener('resize', this.updateDimensions.bind(this));
+  //   // remove this on unmount 
+  // }
 
-    //   let color = rgb2hex(this.props.barchartstyles.bar_color)
+  // updateDimensions(event) {
+  //   this.setState({
+  //     chartWidth: event.target.innerWidth
+  //   }) 
+  // }
 
-    //   console.log(color)
+  onLayout = (e) => {
+    console.log("New Width", e.nativeEvent.layout.Width)
+    this.setState({
+      width: e.nativeEvent.layout.width,
+      height: e.nativeEvent.layout.height
+    })
+  }
 
-    // return (<View>
-    //     <BarChart  style={{
-    //         marginVertical: 8,
-    //         borderRadius: 16
-    //       }}
-    //         data={data}
-    //         width={Dimensions.get('window').width}
-    //         height={220}
-    //         yAxisLabel={'$'}
-    //         chartConfig={chartConfig}/>
-    // </View>)
-    //     //return this.renderSub()
-    // }
+  render() {
+    console.log(this.props)
+    let data = []
+    let { barchartdesc, barchartstyles, editor } = this.props
+    let width  =  this.props._width
+    let height = this.props._height
+    if (!barchartdesc) { return null }
+    if (editor) {
+      for (let i = 0; i < barchartdesc.length; ++i) {
+        let variables = barchartdesc[i]
+        let xvalue = variables.xaxis + " " + i
+        data.push({ x: xvalue, y: 10 })
+      }
+
+      // if (width) {
+      
+
+        return (
+      
+          <svg viewBox={"0 0" + " "+ width +" " + height}  preserveAspectRatio="none" width="100%">
+            <VictoryChart domainPadding={{ x: 40 }}
+            standalone={false}
+              width={width}
+              height={height}
+              maxDomain={{ y: 2 * (data[0].y) }}>
+              <VictoryLabel text={barchartstyles.chart_title} x={10} y={height*.05} textAnchor="start" style={{ fontSize: 16, fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_subtitle} x={10} y={(height*.05)+15} textAnchor="start" style={{ fontSize: 12, fill: "#BABABA" }} />
+              <VictoryAxis dependentAxis
+                label={barchartstyles.y_axis_label}
+                style={{
+                  axis:{stroke:"transparent"},
+                  grid: { stroke: "#E0E0E0" },
+                  tickLabels: { fontSize: 10, fill: "#BDBDBD" },
+                  axisLabel: { fontSize: 10, padding: 30, fill: "#BDBDBD" }
+                }} />
+              <VictoryAxis tickFormat={(t) => {
+               
+                return t;
+              }}
+                label={barchartstyles.x_axis_label}
+                style={{
+                  axis:{stroke:"#9E9E9E"},
+                  tickLabels: { fontSize: 9, fill: "#9E9E9E" },
+                  axisLabel: { fontSize: 9, padding: 30, fill: "#9E9E9E" }
+                }}
+              />
+              <VictoryBar
+                style={{
+                  data: { fill: barchartstyles.bar_color },
+                  labels: { fontSize: 11, fill: "#424242" }
+                }}
+                data={data}
+                labels={(d) => {
+                  if (barchartstyles.toggle_label) { return d.y }
+                  return ""
+                }}
+                labelComponent={<VictoryLabel dy={10}/>}
+              />
+
+
+            </VictoryChart>
+
+    </svg>
+
+          )
+     
+    }
+
+    for (let i = 0; i < barchartdesc.length; ++i) {
+      let variables = barchartdesc[i]
+
+      data.push({ x: variables.xaxis, y: variables.yaxis })
+    }
+    
+    if(this.state.width){
+      console.log("Width", this.state.width)
+    return (<View>
+    
+      <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
+            <VictoryChart domainPadding={{ x: 40 }}
+            standalone={false}
+              width={this.state.width}
+              height={height}>
+              <VictoryLabel text={barchartstyles.chart_title} x={10} y={height*.05} textAnchor="start" style={{ fontSize: 16, fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_subtitle} x={10} y={(height*.05)+15} textAnchor="start" style={{ fontSize: 12, fill: "#BABABA" }} />
+              <VictoryAxis dependentAxis
+                label={barchartstyles.y_axis_label}
+                style={{
+                  axis:{stroke:"transparent"},
+                  grid: { stroke: "#E0E0E0" },
+                  tickLabels: { fontSize: 10, fill: "#BDBDBD" },
+                  axisLabel: { fontSize: 10, padding: 30, fill: "#BDBDBD" }
+                }} />
+              <VictoryAxis tickFormat={(t) => {
+                return t.substring(0, 8) + "..."
+              }}
+                label={barchartstyles.x_axis_label}
+                style={{
+                  axis:{stroke:"#9E9E9E"},
+                  tickLabels: { fontSize: 9, fill: "#9E9E9E" },
+                  axisLabel: { fontSize: 9, padding: 30, fill: "#9E9E9E" }
+                }}
+              />
+              <VictoryBar
+                style={{
+                  data: { fill: barchartstyles.bar_color },
+                  labels: { fontSize: 11, fill: "#424242" }
+                }}
+                data={data}
+                events={[{
+                  target: "data",
+                  eventHandlers: {
+                    onClick: (d,i) => {
+                      barchartdesc[i.index].baraction()}
+                  }
+                }]}
+                labels={(d) => {
+                  if (barchartstyles.toggle_label) { return d.y }
+                  return ""
+                }}
+                labelComponent={<VictoryLabel dy={10}/>}
+              />
+
+
+            </VictoryChart>
+    </svg>
+    
+    </View>)
+    }
+    return(<View style={{flex: 1, alignSelf: 'stretch'}} onLayout={this.onLayout}>
+        {console.log('Reached')}
+  </View>)
+  }
+
+
 }
 
-function rgb2hex(rgb){
-  rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i)
-  return (rgb && rgb.length === 4) ? "#" +
-   ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-   ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-   ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : ''
- }
+

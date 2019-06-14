@@ -32,33 +32,29 @@ export default class BarChartComponent extends Component {
       width: undefined,
       height: undefined
     }
+<<<<<<< HEAD
    
+=======
+>>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     chartWidth: window.innerWidth
-  //   });
-  //   window.addEventListener('resize', this.updateDimensions.bind(this));
-  //   // remove this on unmount 
-  // }
-
-  // updateDimensions(event) {
-  //   this.setState({
-  //     chartWidth: event.target.innerWidth
-  //   }) 
-  // }
+  
 
   onLayout = (e) => {
+<<<<<<< HEAD
   
+=======
+>>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
     this.setState({
       width: e.nativeEvent.layout.width,
-      height: e.nativeEvent.layout.height
     })
   }
 
   render() {
+<<<<<<< HEAD
     
+=======
+>>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
     let data = []
     let { barchartdesc, barchartstyles, editor } = this.props
     let width  =  this.props._width
@@ -70,9 +66,6 @@ export default class BarChartComponent extends Component {
         let xvalue = variables.xaxis + " " + i
         data.push({ x: xvalue, y: 10 })
       }
-
-      // if (width) {
-      
 
         return (
       
@@ -135,7 +128,10 @@ export default class BarChartComponent extends Component {
     }
     
     if(this.state.width){
+<<<<<<< HEAD
       
+=======
+>>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
     return (<View>
     
       <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">

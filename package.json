@@ -1,7 +1,7 @@
 {
   "name": "@protonapp/barchart-component",
   "version": "0.0.1",
-  "description": "Bar Chart Component for Proton",
+  "description": "Bar Chart Component for Foundry",
   "main": "index.js",
   "scripts": {
     "build": "proton build",

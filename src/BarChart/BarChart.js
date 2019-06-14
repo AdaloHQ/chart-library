@@ -17,9 +17,12 @@ import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryLabel, Bar,
 
 
 
-
+const wrap = (s) => s.replace(
+  /(?![^\n]{1,10}$)([^\n]{1,10})\s/g, '$1\n'
+)
 
 export default class BarChartComponent extends Component {
+  
 
   constructor(props) {
     super(props);
@@ -29,7 +32,7 @@ export default class BarChartComponent extends Component {
       width: undefined,
       height: undefined
     }
-    console.log("COnstructor width: ", this.state.width)
+   
   }
 
   // componentDidMount() {
@@ -47,7 +50,7 @@ export default class BarChartComponent extends Component {
   // }
 
   onLayout = (e) => {
-    console.log("New Width", e.nativeEvent.layout.Width)
+  
     this.setState({
       width: e.nativeEvent.layout.width,
       height: e.nativeEvent.layout.height
@@ -55,7 +58,7 @@ export default class BarChartComponent extends Component {
   }
 
   render() {
-    console.log(this.props)
+    
     let data = []
     let { barchartdesc, barchartstyles, editor } = this.props
     let width  =  this.props._width
@@ -79,31 +82,34 @@ export default class BarChartComponent extends Component {
               width={width}
               height={height}
               maxDomain={{ y: 2 * (data[0].y) }}>
-              <VictoryLabel text={barchartstyles.chart_title} x={10} y={height*.05} textAnchor="start" style={{ fontSize: 16, fill: "#212121" }} />
-              <VictoryLabel text={barchartstyles.chart_subtitle} x={10} y={(height*.05)+15} textAnchor="start" style={{ fontSize: 12, fill: "#BABABA" }} />
+              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontSize: (16*1.3), fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontSize: (12*1.3), fill: "#BABABA" }} />
               <VictoryAxis dependentAxis
                 label={barchartstyles.y_axis_label}
                 style={{
                   axis:{stroke:"transparent"},
                   grid: { stroke: "#E0E0E0" },
-                  tickLabels: { fontSize: 10, fill: "#BDBDBD" },
-                  axisLabel: { fontSize: 10, padding: 30, fill: "#BDBDBD" }
+                  tickLabels: { fontSize: 13, fill: "#BDBDBD" },
+                  axisLabel: { fontSize: 13, padding: 30, fill: "#BDBDBD" }
                 }} />
               <VictoryAxis tickFormat={(t) => {
-               
-                return t;
+                  
+
+                  let result = wrap(t)
+                    
+                  return result
               }}
                 label={barchartstyles.x_axis_label}
                 style={{
                   axis:{stroke:"#9E9E9E"},
-                  tickLabels: { fontSize: 9, fill: "#9E9E9E" },
-                  axisLabel: { fontSize: 9, padding: 30, fill: "#9E9E9E" }
+                  tickLabels: { fontSize: 9*1.3, fill: "#9E9E9E" },
+                  axisLabel: { fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
                 }}
               />
               <VictoryBar
                 style={{
                   data: { fill: barchartstyles.bar_color },
-                  labels: { fontSize: 11, fill: "#424242" }
+                  labels: { fontSize: 11*1.3, fill: "#424242" }
                 }}
                 data={data}
                 labels={(d) => {
@@ -129,7 +135,7 @@ export default class BarChartComponent extends Component {
     }
     
     if(this.state.width){
-      console.log("Width", this.state.width)
+      
     return (<View>
     
       <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
@@ -137,30 +143,32 @@ export default class BarChartComponent extends Component {
             standalone={false}
               width={this.state.width}
               height={height}>
-              <VictoryLabel text={barchartstyles.chart_title} x={10} y={height*.05} textAnchor="start" style={{ fontSize: 16, fill: "#212121" }} />
-              <VictoryLabel text={barchartstyles.chart_subtitle} x={10} y={(height*.05)+15} textAnchor="start" style={{ fontSize: 12, fill: "#BABABA" }} />
+              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontSize: 16*1.3, fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontSize: 12*1.3, fill: "#BABABA" }} />
               <VictoryAxis dependentAxis
                 label={barchartstyles.y_axis_label}
                 style={{
                   axis:{stroke:"transparent"},
                   grid: { stroke: "#E0E0E0" },
-                  tickLabels: { fontSize: 10, fill: "#BDBDBD" },
-                  axisLabel: { fontSize: 10, padding: 30, fill: "#BDBDBD" }
+                  tickLabels: { fontSize: 10*1.3, fill: "#BDBDBD" },
+                  axisLabel: { fontSize: 10*1.3, padding: 30, fill: "#BDBDBD" }
                 }} />
               <VictoryAxis tickFormat={(t) => {
-                return t.substring(0, 8) + "..."
+                 let result = wrap(t)
+                    
+                 return result
               }}
                 label={barchartstyles.x_axis_label}
                 style={{
                   axis:{stroke:"#9E9E9E"},
-                  tickLabels: { fontSize: 9, fill: "#9E9E9E" },
-                  axisLabel: { fontSize: 9, padding: 30, fill: "#9E9E9E" }
+                  tickLabels: { fontSize: 9*1.3, fill: "#9E9E9E" },
+                  axisLabel: { fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
                 }}
               />
               <VictoryBar
                 style={{
                   data: { fill: barchartstyles.bar_color },
-                  labels: { fontSize: 11, fill: "#424242" }
+                  labels: { fontSize: 11*1.3, fill: "#424242" }
                 }}
                 data={data}
                 events={[{
@@ -184,11 +192,10 @@ export default class BarChartComponent extends Component {
     </View>)
     }
     return(<View style={{flex: 1, alignSelf: 'stretch'}} onLayout={this.onLayout}>
-        {console.log('Reached')}
+        
   </View>)
   }
 
 
 }
-
 

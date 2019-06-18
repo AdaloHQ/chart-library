@@ -1,8 +1,8 @@
 {
   "displayName": "Bar Chart",
   "icon": "./icon.png",
-  "defaultWidth": 300,
-  "defaultHeight": 300,
+  "defaultWidth": 337,
+  "defaultHeight": 237,
   "component": "./BarChart.js",
   "resizeY":true,
   "props": [

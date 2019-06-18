@@ -32,29 +32,17 @@ export default class BarChartComponent extends Component {
       width: undefined,
       height: undefined
     }
-<<<<<<< HEAD
-   
-=======
->>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
   }
 
   
 
   onLayout = (e) => {
-<<<<<<< HEAD
-  
-=======
->>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
     this.setState({
       width: e.nativeEvent.layout.width,
     })
   }
 
   render() {
-<<<<<<< HEAD
-    
-=======
->>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
     let data = []
     let { barchartdesc, barchartstyles, editor } = this.props
     let width  =  this.props._width
@@ -75,15 +63,15 @@ export default class BarChartComponent extends Component {
               width={width}
               height={height}
               maxDomain={{ y: 2 * (data[0].y) }}>
-              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontSize: (16*1.3), fill: "#212121" }} />
-              <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontSize: (12*1.3), fill: "#BABABA" }} />
+              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily:"inherit", fontSize: (16*1.3), fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily:"inherit", fontSize: (12*1.3), fill: "#BABABA" }} />
               <VictoryAxis dependentAxis
                 label={barchartstyles.y_axis_label}
                 style={{
                   axis:{stroke:"transparent"},
                   grid: { stroke: "#E0E0E0" },
-                  tickLabels: { fontSize: 13, fill: "#BDBDBD" },
-                  axisLabel: { fontSize: 13, padding: 30, fill: "#BDBDBD" }
+                  tickLabels: { fontFamily:"inherit", fontSize: 13, fill: "#BDBDBD" },
+                  axisLabel: { fontFamily:"inherit", fontSize: 13, padding: 30, fill: "#BDBDBD" }
                 }} />
               <VictoryAxis tickFormat={(t) => {
                   
@@ -95,14 +83,14 @@ export default class BarChartComponent extends Component {
                 label={barchartstyles.x_axis_label}
                 style={{
                   axis:{stroke:"#9E9E9E"},
-                  tickLabels: { fontSize: 9*1.3, fill: "#9E9E9E" },
-                  axisLabel: { fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
+                  tickLabels: { fontFamily:"inherit", fontSize: 9*1.3, fill: "#9E9E9E" },
+                  axisLabel: { fontFamily:"inherit", fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
                 }}
               />
               <VictoryBar
                 style={{
                   data: { fill: barchartstyles.bar_color },
-                  labels: { fontSize: 11*1.3, fill: "#424242" }
+                  labels: { fontFamily:"inherit", fontSize: 11*1.3, fill: "#424242" }
                 }}
                 data={data}
                 labels={(d) => {
@@ -128,10 +116,7 @@ export default class BarChartComponent extends Component {
     }
     
     if(this.state.width){
-<<<<<<< HEAD
       
-=======
->>>>>>> 6d2794e032e3d8e15cf49585450fa2138258d252
     return (<View>
     
       <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
@@ -139,15 +124,15 @@ export default class BarChartComponent extends Component {
             standalone={false}
               width={this.state.width}
               height={height}>
-              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontSize: 16*1.3, fill: "#212121" }} />
-              <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontSize: 12*1.3, fill: "#BABABA" }} />
+              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 16*1.3, fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 12*1.3, fill: "#BABABA" }} />
               <VictoryAxis dependentAxis
                 label={barchartstyles.y_axis_label}
                 style={{
                   axis:{stroke:"transparent"},
                   grid: { stroke: "#E0E0E0" },
-                  tickLabels: { fontSize: 10*1.3, fill: "#BDBDBD" },
-                  axisLabel: { fontSize: 10*1.3, padding: 30, fill: "#BDBDBD" }
+                  tickLabels: { fontFamily:"inherit", fontSize: 10*1.3, fill: "#BDBDBD" },
+                  axisLabel: { fontFamily:"inherit", fontSize: 10*1.3, padding: 30, fill: "#BDBDBD" }
                 }} />
               <VictoryAxis tickFormat={(t) => {
                  let result = wrap(t)
@@ -157,14 +142,14 @@ export default class BarChartComponent extends Component {
                 label={barchartstyles.x_axis_label}
                 style={{
                   axis:{stroke:"#9E9E9E"},
-                  tickLabels: { fontSize: 9*1.3, fill: "#9E9E9E" },
-                  axisLabel: { fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
+                  tickLabels: { fontFamily:"inherit", fontSize: 9*1.3, fill: "#9E9E9E" },
+                  axisLabel: { fontFamily:"inherit", fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
                 }}
               />
               <VictoryBar
                 style={{
                   data: { fill: barchartstyles.bar_color },
-                  labels: { fontSize: 11*1.3, fill: "#424242" }
+                  labels: { fontFamily:"inherit", fontSize: 11*1.3, fill: "#424242" }
                 }}
                 data={data}
                 events={[{

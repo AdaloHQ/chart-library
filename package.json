@@ -1,18 +1,17 @@
 {
-  "name": "@protonapp/barchart-component",
+  "name": "@protonapp/chart-component",
   "version": "0.0.1",
-  "description": "Bar Chart Component for Foundry",
+  "description": "Chart Components Component for Foundry",
   "main": "index.js",
   "scripts": {
     "build": "proton build",
     "publish": "proton publish",
-    "copy": "rm -rf ../../previewer/node_modules/@protonapp/stripe-component/src/ && cp -r src ../../previewer/node_modules/@protonapp/stripe-component/src && cp -r index.js ../../previewer/node_modules/@protonapp/stripe-component/index.js",
-    "devlocal": "FOUNDRY_DEV_SERVER=http://localhost:3035 foundry dev"
+    "start": "FOUNDRY_DEV_SERVER=http://localhost:3035 npx foundry dev"
   },
-  "author": "Jeremy Blalock",
+  "author": "Kedar Bell",
   "license": "ISC",
   "proton": {
-    "displayName": "Bar Chart Component",
+    "displayName": "Charts",
     "components": [
       {
         "name": "BarChart",

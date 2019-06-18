@@ -16,6 +16,10 @@
       {
         "name": "BarChart",
         "manifest": "./src/BarChart/BarChartManifest.json"
+      },
+      {
+        "name": "LineChart",
+        "manifest": "./src/LineChart/LineChartManifest.json"
       }
     ]
   },

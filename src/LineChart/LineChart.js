@@ -169,6 +169,7 @@ export default class LineChartComponent extends Component {
           <VictoryChart domainPadding={{ x: 40 }}
             standalone={false}
             width={this.state.width}
+            minDomain= {{y:0}}
             height={height}>
             <VictoryLabel text={linechartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 16 * 1.3, fill: "#212121" }} />
             <VictoryLabel text={linechartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 12 * 1.3, fill: "#BABABA" }} />

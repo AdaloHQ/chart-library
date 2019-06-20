@@ -1,0 +1,85 @@
+{
+  "displayName": "Line Chart",
+  "icon": "./icon.png",
+  "defaultWidth": 337,
+  "defaultHeight": 237,
+  "component": "./LineChart.js",
+  "resizeY":true,
+  "props": [
+    {
+      "name": "linechartdesc",
+      "displayName": "What is this a chart of?",
+      "type": "list"
+    },
+    {
+      "name":"xaxis",
+      "displayName": "X Axis Value",
+      "type":"text",
+      "role": "listItem",
+      "reference":"linechartdesc"
+    },
+    {
+      "name":"yaxis",
+      "displayName": "Y Axis Value",
+      "type":"number",
+      "role": "listItem",
+      "reference":"linechartdesc"
+    },
+    {
+      "name":"pointaction",
+      "displayName":"Point Action",
+      "type": "action",
+      "role": "listItem",
+      "reference":"linechartdesc"
+    }
+  ],"childComponents": [
+    {
+      "name": "linechartstyles",
+      "displayName": "Styles",
+      "props": [
+        {
+          "name": "chart_title",
+          "displayName": "Chart Title",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "name": "chart_subtitle",
+          "displayName": "Chart Subtitle",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "name":"y_axis_label",
+          "displayName": "Y Axis Label",
+          "type":"text",
+          "default":""
+        },
+        {
+          "name": "x_axis_label",
+          "displayName": "X Axis Label",
+          "type":"text",
+          "default":""
+        },
+        {
+          "name": "line_color",
+          "displayName": "Line Color",
+          "type": "color",
+          "default": "@primary"
+        },
+        {
+          "name": "toggle_point",
+          "displayName": "Toggle Data Points",
+          "type":"boolean"
+        },
+        {
+          "name": "toggle_label",
+          "displayName": "Toggle Y Labels",
+          "type":"boolean"
+        }
+      ]
+    }
+  
+  ]
+}
+

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 import {
   View,
-  
+
 } from 'react-native'
 
 import { VictoryLine, VictoryChart, VictoryScatter, VictoryAxis, VictoryLabel, VictoryPortal, VictoryClipContainer } from "victory-native"
@@ -34,7 +34,6 @@ export default class LineChartComponent extends Component {
     let { linechartdesc, linechartstyles, editor } = this.props
     let width = this.props._width
     let height = this.props._height
-    console.log("Props", this.props)
     if (!linechartdesc) { return null }
 
     if (editor) {
@@ -47,7 +46,6 @@ export default class LineChartComponent extends Component {
 
 
       ]
-      console.log(linechartdesc[0].xaxis.length)
       max = data.reduce((prev, current) => (prev.y > current.y) ? prev : current)
 
       return (
@@ -95,7 +93,6 @@ export default class LineChartComponent extends Component {
                 tickLabels: {
                   fontFamily: "inherit", fontSize: 9 * 1.3, padding: 10, fill: "#9E9E9E"
                   , textAnchor: (d) => {
-                    console.log("Length", data[d - 1].x.length)
                     if (data.length < 4) {
 
                       return "middle"
@@ -104,7 +101,7 @@ export default class LineChartComponent extends Component {
                     if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
                       return "start"
                     }
-                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" } 
+                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
                     // return "middle"
                     return "middle"
                   }, angle: (d) => {
@@ -163,8 +160,6 @@ export default class LineChartComponent extends Component {
     }
 
     max = data.reduce((prev, current) => (prev.y > current.y) ? prev : current)
-    console.log("Props", this.props)
-    console.log("Data", data)
 
     if (this.state.width) {
 
@@ -210,7 +205,6 @@ export default class LineChartComponent extends Component {
                 tickLabels: {
                   fontFamily: "inherit", fontSize: 9 * 1.3, padding: 10, fill: "#9E9E9E"
                   , textAnchor: (d) => {
-                    console.log("Length", data[d - 1].x.length)
                     if (data.length < 4) {
 
                       return "middle"
@@ -219,7 +213,7 @@ export default class LineChartComponent extends Component {
                     if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
                       return "start"
                     }
-                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" } 
+                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
                     // return "middle"
                     return "middle"
                   }, angle: (d) => {

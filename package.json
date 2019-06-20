@@ -1,11 +1,11 @@
 {
-  "name": "@protonapp/chart-component",
-  "version": "0.0.1",
+  "name": "@protonapp/barchart-component",
+  "version": "0.0.2",
   "description": "Chart Components Component for Foundry",
   "main": "index.js",
   "scripts": {
     "build": "proton build",
-    "publish": "proton publish",
+    "publish": "S3_BUCKET=proton-libraries S3_REGION=us-east-1 proton publish",
     "start": "FOUNDRY_DEV_SERVER=http://localhost:3035 npx foundry dev"
   },
   "author": "Kedar Bell",

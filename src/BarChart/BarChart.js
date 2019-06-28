@@ -47,7 +47,62 @@ export default class BarChartComponent extends Component {
     let { barchartdesc, barchartstyles, editor } = this.props
     let width  =  this.props._width
     let height = this.props._height
-    if (!barchartdesc) { return null }
+    if (!barchartdesc) { 
+      data = [ { x: "null 1", y: 2 },
+      { x: "null 2", y: 3 },
+      { x: "null 3", y: 5 }]
+      
+      if(this.state.width){
+      
+      return (<View>
+      
+        <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
+              <VictoryChart domainPadding={{ x:(width/data.length * .3) }}
+              standalone={false}
+                width={this.state.width}
+                height={height}>
+                <VictoryLabel text={"No Chart Data"} x={27} y={10} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 16*1.3, fill: "#212121" }} />
+                <VictoryLabel text={"Please input chart data"} x={27} y={30} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 12*1.3, fill: "#BABABA" }} />
+                <VictoryAxis dependentAxis
+                  label={"Y Axis"}
+                  style={{
+                    axis:{stroke:"transparent"},
+                    grid: { stroke: "#E0E0E0" },
+                    tickLabels: { fontFamily:"inherit", fontSize: 10*1.3, fill: "#BDBDBD" },
+                    axisLabel: { fontFamily:"inherit", fontSize: 10*1.3, padding: 30, fill: "#BDBDBD" }
+                  }} />
+                <VictoryAxis tickFormat={(t) => {
+                   let result = wrap(t)
+                      
+                   return result
+                }}
+                  label={"X Axis"}
+                  style={{
+                    axis:{stroke:"#9E9E9E"},
+                    tickLabels: { fontFamily:"inherit", fontSize: 9*1.3, fill: "#9E9E9E" },
+                    axisLabel: { fontFamily:"inherit", fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
+                  }}
+                />
+                <VictoryBar
+                  style={{
+                    data: { fill: "black" },
+                    labels: { fontFamily:"inherit", fontSize: 11*1.3, fill: "#424242" }
+                  }}
+                  data={data}
+                 
+                />
+  
+  
+              </VictoryChart>
+      </svg>
+      
+      </View>)
+      }
+      return(<View style={{flex: 1, alignSelf: 'stretch'}} onLayout={this.onLayout}>
+          
+    </View>) 
+    
+    }
     if (editor) {
       for (let i = 0; i < barchartdesc.length; ++i) {
         let variables = barchartdesc[i]

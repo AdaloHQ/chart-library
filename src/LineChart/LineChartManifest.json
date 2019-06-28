@@ -50,14 +50,14 @@
           "default": ""
         },
         {
-          "name":"y_axis_label",
-          "displayName": "Y Axis Label",
+          "name": "x_axis_label",
+          "displayName": "X Axis Label",
           "type":"text",
           "default":""
         },
         {
-          "name": "x_axis_label",
-          "displayName": "X Axis Label",
+          "name":"y_axis_label",
+          "displayName": "Y Axis Label",
           "type":"text",
           "default":""
         },

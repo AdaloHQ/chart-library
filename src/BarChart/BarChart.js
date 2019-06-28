@@ -58,12 +58,12 @@ export default class BarChartComponent extends Component {
         return (
       
           <svg viewBox={"0 0" + " "+ width +" " + height}  preserveAspectRatio="none" width="100%">
-            <VictoryChart domainPadding={{ x: 40 }}
+            <VictoryChart domainPadding={{ x: (width/data.length * .3) }}
             standalone={false}
               width={width}
               height={height}
               maxDomain={{ y: 2 * (data[0].y) }}>
-              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily:"inherit", fontSize: (16*1.3), fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_title} x={27} y={10} textAnchor="start" style={{ fontFamily:"inherit", fontSize: (16*1.3), fill: "#212121" }} />
               <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily:"inherit", fontSize: (12*1.3), fill: "#BABABA" }} />
               <VictoryAxis dependentAxis
                 label={barchartstyles.y_axis_label}
@@ -120,11 +120,11 @@ export default class BarChartComponent extends Component {
     return (<View>
     
       <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
-            <VictoryChart domainPadding={{ x: 40 }}
+            <VictoryChart domainPadding={{ x:(width/data.length * .3) }}
             standalone={false}
               width={this.state.width}
               height={height}>
-              <VictoryLabel text={barchartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 16*1.3, fill: "#212121" }} />
+              <VictoryLabel text={barchartstyles.chart_title} x={27} y={10} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 16*1.3, fill: "#212121" }} />
               <VictoryLabel text={barchartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily:"inherit", fontSize: 12*1.3, fill: "#BABABA" }} />
               <VictoryAxis dependentAxis
                 label={barchartstyles.y_axis_label}

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "proton build",
     "publish": "S3_BUCKET=proton-libraries S3_REGION=us-east-1 proton publish",
+    "sign-in": "FOUNDRY_BACKEND_SERVER=http://localhost:8084 npx foundry login",
     "start": "FOUNDRY_DEV_SERVER=http://localhost:3035 npx foundry dev"
   },
   "author": "Kedar Bell",

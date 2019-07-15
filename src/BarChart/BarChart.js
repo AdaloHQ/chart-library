@@ -1,28 +1,15 @@
 //import Icon from "./_laska_/Icon";
 import React, { Component } from 'react'
 
-import {
-  ActivityIndicator,
-  Platform,
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
-  Dimensions,
-} from 'react-native'
+import {View} from 'react-native'
 
-import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryLabel, Bar, VictoryPortal, } from "victory-native"
-
-
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel, VictoryContainer } from "victory-native"
 
 const wrap = (s) => s.replace(
   /(?![^\n]{1,10}$)([^\n]{1,10})\s/g, '$1\n'
 )
 
-export default class BarChartComponent extends Component {
-  
+export default class BarChartComponent extends Component { 
 
   constructor(props) {
     super(props);
@@ -34,8 +21,6 @@ export default class BarChartComponent extends Component {
     }
   }
 
-  
-
   onLayout = (e) => {
     this.setState({
       width: e.nativeEvent.layout.width,
@@ -44,7 +29,7 @@ export default class BarChartComponent extends Component {
 
   render() {
     let data = []
-    let { barchartdesc, barchartstyles, editor } = this.props
+    let { barchartdesc, barchartstyles, editor, listLoading } = this.props
     let width  =  this.props._width
     let height = this.props._height
     if (!barchartdesc) { 
@@ -53,10 +38,13 @@ export default class BarChartComponent extends Component {
       { x: "null 3", y: 5 }]
       
       if(this.state.width){
-      
+        if(listLoading){
+          return(<View> 
+      </View>)
+        }
       return (<View>
       
-        <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
+      <VictoryContainer width = {this.state.width} height = {height}>
               <VictoryChart domainPadding={{ x:(width/data.length * .3) }}
               standalone={false}
                 width={this.state.width}
@@ -94,7 +82,7 @@ export default class BarChartComponent extends Component {
   
   
               </VictoryChart>
-      </svg>
+      </VictoryContainer>
       
       </View>)
       }
@@ -112,7 +100,7 @@ export default class BarChartComponent extends Component {
 
         return (
       
-          <svg viewBox={"0 0" + " "+ width +" " + height}  preserveAspectRatio="none" width="100%">
+          <VictoryContainer width = {width} height = {height}>
             <VictoryChart domainPadding={{ x: (width/data.length * .3) }}
             standalone={false}
               width={width}
@@ -158,7 +146,7 @@ export default class BarChartComponent extends Component {
 
             </VictoryChart>
 
-    </svg>
+            </VictoryContainer>
 
           )
      
@@ -173,8 +161,7 @@ export default class BarChartComponent extends Component {
     if(this.state.width){
       
     return (<View>
-    
-      <svg viewBox={"0 0" + " "+ this.state.width +" " + height}  preserveAspectRatio="none" width="100%">
+    <VictoryContainer width = {this.state.width} height = {height}>
             <VictoryChart domainPadding={{ x:(width/data.length * .3) }}
             standalone={false}
               width={this.state.width}
@@ -223,7 +210,7 @@ export default class BarChartComponent extends Component {
 
 
             </VictoryChart>
-    </svg>
+    </VictoryContainer>
     
     </View>)
     }

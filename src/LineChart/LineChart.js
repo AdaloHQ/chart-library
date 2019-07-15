@@ -6,7 +6,7 @@ import {
 
 } from 'react-native'
 
-import { VictoryLine, VictoryChart, VictoryScatter, VictoryAxis, VictoryLabel, VictoryPortal, VictoryClipContainer } from "victory-native";
+import { VictoryLine, VictoryChart, VictoryScatter, VictoryAxis, VictoryLabel, VictoryPortal, VictoryClipContainer, VictoryContainer } from "victory-native";
 
 const empty = [
   { x: "null 1", y: 2 },
@@ -18,7 +18,6 @@ const empty = [
 
 export default class LineChartComponent extends Component {
 
-
   constructor(props) {
     super(props);
 
@@ -29,8 +28,6 @@ export default class LineChartComponent extends Component {
     }
   }
 
-
-
   onLayout = (e) => {
     this.setState({
       width: e.nativeEvent.layout.width,
@@ -39,17 +36,19 @@ export default class LineChartComponent extends Component {
 
   render() {
     let data, max
-    let { linechartdesc, linechartstyles, editor } = this.props
+    let { linechartdesc, linechartstyles, editor, listLoading } = this.props
     let width = this.props._width
     let height = this.props._height
-    
     if (!linechartdesc) { 
       data = empty
       if (this.state.width) {
+        if(listLoading){
+          return(<View> 
+      </View>)
+        }
       
       return (<View>
-
-        <svg viewBox={"0 0" + " " + this.state.width + " " + height} preserveAspectRatio="none" width="100%">
+          <VictoryContainer width = {this.state.width} height = {height}>
           <VictoryChart domainPadding={{ x: 40 }}
             standalone={false}
             width={this.state.width}
@@ -143,8 +142,7 @@ export default class LineChartComponent extends Component {
             </VictoryPortal>
 
           </VictoryChart>
-        </svg>
-
+          </VictoryContainer>
       </View>)
     }
 
@@ -161,8 +159,7 @@ export default class LineChartComponent extends Component {
       max = data.reduce((prev, current) => (prev.y > current.y) ? prev : current)
 
       return (
-
-        <svg viewBox={"0 0" + " " + width + " " + height} preserveAspectRatio="none" width="100%">
+        <VictoryContainer width = {width} height = {height}>
           <VictoryChart domainPadding={{ x: 40 }}
             standalone={false}
             width={width}
@@ -256,9 +253,7 @@ export default class LineChartComponent extends Component {
             </VictoryPortal>
 
           </VictoryChart>
-
-        </svg>
-
+          </VictoryContainer>
       )
 
     }
@@ -274,8 +269,7 @@ export default class LineChartComponent extends Component {
     if (this.state.width) {
       
       return (<View>
-
-        <svg viewBox={"0 0" + " " + this.state.width + " " + height} preserveAspectRatio="none" width="100%">
+        <VictoryContainer width = {this.state.width} height = {height}>
           <VictoryChart domainPadding={{ x: 40 }}
             standalone={false}
             width={this.state.width}
@@ -323,8 +317,6 @@ export default class LineChartComponent extends Component {
                     if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
                       return "start"
                     }
-                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
-                    // return "middle"
                     return "middle"
                   }, angle: (d) => {
                     if (data.length < 4) {
@@ -384,8 +376,7 @@ export default class LineChartComponent extends Component {
             </VictoryPortal>
 
           </VictoryChart>
-        </svg>
-
+          </VictoryContainer>
       </View>)
     }
     return (<View style={{ flex: 1, alignSelf: 'stretch' }} onLayout={this.onLayout}>

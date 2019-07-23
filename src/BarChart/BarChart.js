@@ -2,24 +2,16 @@
 import React, { Component } from 'react'
 
 import {
-  ActivityIndicator,
-  Platform,
   View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
-  Dimensions,
 } from 'react-native'
 
-import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis, VictoryLabel, Bar, VictoryPortal, } from "victory-native"
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel } from "victory-native"
 
 
 
-const wrap = (s) => s.replace(
-  /(?![^\n]{1,10}$)([^\n]{1,10})\s/g, '$1\n'
-)
+// const wrap = (s) => s.replace(
+//   /(?![^\n]{1,10}$)([^\n]{1,10})\s/g, '$1\n'
+// )
 
 export default class BarChartComponent extends Component {
   
@@ -54,7 +46,8 @@ export default class BarChartComponent extends Component {
         let xvalue = variables.xaxis + " " + i
         data.push({ x: xvalue, y: 10 })
       }
-
+      data.push({x: barchartdesc[0].xaxis+" "+4, y:10})
+      data.push({x: barchartdesc[0].xaxis+" "+5, y:10})
         return (
       
           <svg viewBox={"0 0" + " "+ width +" " + height}  preserveAspectRatio="none" width="100%">
@@ -70,20 +63,56 @@ export default class BarChartComponent extends Component {
                 style={{
                   axis:{stroke:"transparent"},
                   grid: { stroke: "#E0E0E0" },
-                  tickLabels: { fontFamily:"inherit", fontSize: 13, fill: "#BDBDBD" },
+                  tickLabels: {
+                    fontFamily: "inherit", fontSize: 9 * 1.3, padding: 10, fill: "#9E9E9E"
+                   },
                   axisLabel: { fontFamily:"inherit", fontSize: 13, padding: 30, fill: "#BDBDBD" }
                 }} />
               <VictoryAxis tickFormat={(t) => {
-                  
+              if (data.length == 2) {
+                if (t.length > 24) {
+                  return t.substring(0, 25)
+                }
+              }
+              if (data.length > 2) {
+                if (t.length >= 13) {
 
-                  let result = wrap(t)
-                    
-                  return result
-              }}
+                  return t.substring(0, 12)
+                }
+
+
+              }
+              return t
+            }}
                 label={barchartstyles.x_axis_label}
                 style={{
                   axis:{stroke:"#9E9E9E"},
-                  tickLabels: { fontFamily:"inherit", fontSize: 9*1.3, fill: "#9E9E9E" },
+                  tickLabels: {
+                    fontFamily: "inherit", fontSize: 9 * 1.3, padding: 10, fill: "#9E9E9E"
+                    , textAnchor: (d) => {
+                      if (data.length < 4) {
+  
+                        return "middle"
+                      }
+  
+                      if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
+                        return "start"
+                      }
+                      // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
+                      // return "middle"
+                      return "middle"
+                    }, angle: (d) => {
+                      if (data.length < 4) {
+  
+                        return 0
+                      }
+
+                      if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
+                        return 20
+                      }
+                      return 0
+                    }
+                  },
                   axisLabel: { fontFamily:"inherit", fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
                 }}
               />
@@ -135,14 +164,50 @@ export default class BarChartComponent extends Component {
                   axisLabel: { fontFamily:"inherit", fontSize: 10*1.3, padding: 30, fill: "#BDBDBD" }
                 }} />
               <VictoryAxis tickFormat={(t) => {
-                 let result = wrap(t)
-                    
-                 return result
-              }}
+              if (data.length == 2) {
+                if (t.length > 24) {
+                  return t.substring(0, 25)
+                }
+              }
+              if (data.length > 2) {
+                if (t.length >= 13) {
+
+                  return t.substring(0, 12)
+                }
+
+
+              }
+              return t
+            }}
                 label={barchartstyles.x_axis_label}
                 style={{
                   axis:{stroke:"#9E9E9E"},
-                  tickLabels: { fontFamily:"inherit", fontSize: 9*1.3, fill: "#9E9E9E" },
+                  tickLabels: {
+                    fontFamily: "inherit", fontSize: 9 * 1.3, padding: 10, fill: "#9E9E9E"
+                    , textAnchor: (d) => {
+                      if (data.length < 4) {
+  
+                        return "middle"
+                      }
+  
+                      if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
+                        return "start"
+                      }
+                      // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
+                      // return "middle"
+                      return "middle"
+                    }, angle: (d) => {
+                      if (data.length < 4) {
+  
+                        return 0
+                      }
+  
+                      if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
+                        return 20
+                      }
+                      return 0
+                    }
+                  },
                   axisLabel: { fontFamily:"inherit", fontSize: 9*1.3, padding: 40, fill: "#9E9E9E" }
                 }}
               />

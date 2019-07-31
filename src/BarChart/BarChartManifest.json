@@ -12,17 +12,17 @@
       "type": "list"
     },
     {
-      "name":"yaxis",
-      "displayName": "Y Axis Value",
-      "type":"number",
-      "role": "listItem",
-      "reference":"barchartdesc"
-    },
-    {
       "name":"xaxis",
       "displayName": "X Axis Value",
       "type":"text",
       "default": "IV",
+      "role": "listItem",
+      "reference":"barchartdesc"
+    },
+    {
+      "name":"yaxis",
+      "displayName": "Y Axis Value",
+      "type":"number",
       "role": "listItem",
       "reference":"barchartdesc"
     },
@@ -51,14 +51,14 @@
           "default": ""
         },
         {
-          "name":"y_axis_label",
-          "displayName": "Y Axis Label",
+          "name": "x_axis_label",
+          "displayName": "X Axis Label",
           "type":"text",
           "default":""
         },
         {
-          "name": "x_axis_label",
-          "displayName": "X Axis Label",
+          "name":"y_axis_label",
+          "displayName": "Y Axis Label",
           "type":"text",
           "default":""
         },

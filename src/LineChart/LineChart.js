@@ -6,10 +6,17 @@ import {
 
 } from 'react-native'
 
-import { VictoryLine, VictoryChart, VictoryScatter, VictoryAxis, VictoryLabel, VictoryPortal, VictoryClipContainer } from "victory-native"
+import { VictoryLine, VictoryChart, VictoryScatter, VictoryAxis, VictoryLabel, VictoryPortal, VictoryClipContainer, VictoryContainer } from "victory-native";
+
+const empty = [
+  { x: "null 1", y: 2 },
+  { x: "null 2", y: 3 },
+  { x: "null 3", y: 5 },
+  { x: "null 4", y: 4 },
+  { x: "null 5", y: 7 },
+]
 
 export default class LineChartComponent extends Component {
-
 
   constructor(props) {
     super(props);
@@ -21,8 +28,6 @@ export default class LineChartComponent extends Component {
     }
   }
 
-
-
   onLayout = (e) => {
     this.setState({
       width: e.nativeEvent.layout.width,
@@ -31,26 +36,130 @@ export default class LineChartComponent extends Component {
 
   render() {
     let data, max
-    let { linechartdesc, linechartstyles, editor } = this.props
+    let { linechartdesc, linechartstyles, editor, listLoading } = this.props
     let width = this.props._width
     let height = this.props._height
-    if (!linechartdesc) { return null }
+    if (!linechartdesc) { 
+      data = empty
+      if (this.state.width) {
+        if(listLoading){
+          return(<View> 
+      </View>)
+        }
+      
+      return (<View>
+          <VictoryContainer width = {this.state.width} height = {height}>
+          <VictoryChart domainPadding={{ x: 40 }}
+            standalone={false}
+            width={this.state.width}
+            minDomain= {{y:0}}
+            height={height}>
+            <VictoryLabel text={"No Chart Data"} x={27} y={10} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 16 * 1.3, fill: "#212121" }} />
+            <VictoryLabel text={"Please input chart data"} x={27} y={30} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 12 * 1.3, fill: "#BABABA" }} />
+            <VictoryAxis dependentAxis
+              label={"Y Axis"}
+              style={{
+                axis: { stroke: "transparent" },
+                grid: { stroke: "#E0E0E0" },
+                tickLabels: { fontFamily: "inherit", fontSize: 10 * 1.3, fill: "#BDBDBD" },
+                axisLabel: { fontFamily: "inherit", fontSize: 10 * 1.3, padding: 30, fill: "#BDBDBD" }
+              }} />
+            <VictoryAxis tickFormat={(t) => {
+              if (data.length == 2) {
+                if (t.length > 24) {
+                  return t.substring(0, 25)
+                }
+              }
+              if (data.length > 2) {
+                if (t.length >= 14) {
+
+                  return t.substring(0, 13)
+                }
+
+
+              }
+              return t
+            }}
+
+              label={"X Axis"}
+              style={{
+                axis: { stroke: "#9E9E9E" },
+                grid: { stroke: "#E0E0E0" },
+                tickLabels: {
+                  fontFamily: "inherit", fontSize: 9 * 1.3, padding: 10, fill: "#9E9E9E"
+                  , textAnchor: (d) => {
+                    if (data.length < 4) {
+
+                      return "middle"
+                    }
+
+                    if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
+                      return "start"
+                    }
+                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
+                    // return "middle"
+                    return "middle"
+                  }, angle: (d) => {
+                    if (data.length < 4) {
+
+                      return 0
+                    }
+
+                    if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
+                      return 20
+                    }
+                    return 0
+                  }
+                },
+                axisLabel: { fontFamily: "inherit", fontSize: 9 * 1.3, padding: 25, fill: "#9E9E9E" }
+              }}
+            />
+            <VictoryLine
+
+              style={{
+                data: { stroke: "black" },
+                parent: { border: "1px solid #ccc" }
+              }}
+              data={data}
+              groupComponent={<VictoryClipContainer clipPadding={{ top: 10, bottom: 10 }} />}
+              labels={(d) => {
+                
+                return ""
+              }}
+              labelComponent={<VictoryLabel dy={5} />}
+
+            />
+            <VictoryPortal>
+              <VictoryScatter
+                style={{
+                  data: {
+                    fill: "black"
+                  }
+                }}
+                data={data}
+              
+              />
+            </VictoryPortal>
+
+          </VictoryChart>
+          </VictoryContainer>
+      </View>)
+    }
+
+    return (<View style={{ flex: 1, alignSelf: 'stretch' }} onLayout={this.onLayout}>
+
+    </View>) }
 
     if (editor) {
-      data = [
-        { x: linechartdesc[0].xaxis + "1", y: 2 },
-        { x: linechartdesc[0].xaxis + "2", y: 3 },
-        { x: linechartdesc[0].xaxis + "3", y: 5 },
-        { x: linechartdesc[0].xaxis + "4", y: 4 },
-        { x: linechartdesc[0].xaxis + "5", y: 7 },
-
-
-      ]
+      data = [{ x: linechartdesc[0].xaxis + "1", y: 2 },
+      { x: linechartdesc[0].xaxis + "2", y: 3 },
+      { x: linechartdesc[0].xaxis + "3", y: 5 },
+      { x: linechartdesc[0].xaxis + "4", y: 4 },
+      { x: linechartdesc[0].xaxis + "5", y: 7 },]
       max = data.reduce((prev, current) => (prev.y > current.y) ? prev : current)
 
       return (
-
-        <svg viewBox={"0 0" + " " + width + " " + height} preserveAspectRatio="none" width="100%">
+        <VictoryContainer width = {width} height = {height}>
           <VictoryChart domainPadding={{ x: 40 }}
             standalone={false}
             width={width}
@@ -58,7 +167,7 @@ export default class LineChartComponent extends Component {
             minDomain={{ y: 0 }}
             maxDomain={{ y: max.y + 1 }}
           >
-            <VictoryLabel text={linechartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily: "inherit", fontSize: (16 * 1.3), fill: "#212121" }} />
+            <VictoryLabel text={linechartstyles.chart_title} x={27} y={10} textAnchor="start" style={{ fontFamily: "inherit", fontSize: (16 * 1.3), fill: "#212121" }} />
             <VictoryLabel text={linechartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily: "inherit", fontSize: (12 * 1.3), fill: "#BABABA" }} />
             <VictoryAxis dependentAxis
               label={linechartstyles.y_axis_label}
@@ -101,8 +210,6 @@ export default class LineChartComponent extends Component {
                     if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
                       return "start"
                     }
-                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
-                    // return "middle"
                     return "middle"
                   }, angle: (d) => {
                     if (data.length < 4) {
@@ -129,7 +236,7 @@ export default class LineChartComponent extends Component {
                 if (linechartstyles.toggle_label) { return d.y }
                 return ""
               }}
-              labelComponent={<VictoryLabel dy={15} />}
+              labelComponent={<VictoryLabel dy={5} />}
             />
             <VictoryPortal>
               <VictoryScatter
@@ -146,9 +253,7 @@ export default class LineChartComponent extends Component {
             </VictoryPortal>
 
           </VictoryChart>
-
-        </svg>
-
+          </VictoryContainer>
       )
 
     }
@@ -160,18 +265,17 @@ export default class LineChartComponent extends Component {
     }
 
     max = data.reduce((prev, current) => (prev.y > current.y) ? prev : current)
-
+   
     if (this.state.width) {
-
+      
       return (<View>
-
-        <svg viewBox={"0 0" + " " + this.state.width + " " + height} preserveAspectRatio="none" width="100%">
+        <VictoryContainer width = {this.state.width} height = {height}>
           <VictoryChart domainPadding={{ x: 40 }}
             standalone={false}
             width={this.state.width}
             minDomain= {{y:0}}
             height={height}>
-            <VictoryLabel text={linechartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 16 * 1.3, fill: "#212121" }} />
+            <VictoryLabel text={linechartstyles.chart_title} x={27} y={10} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 16 * 1.3, fill: "#212121" }} />
             <VictoryLabel text={linechartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily: "inherit", fontSize: 12 * 1.3, fill: "#BABABA" }} />
             <VictoryAxis dependentAxis
               label={linechartstyles.y_axis_label}
@@ -213,8 +317,6 @@ export default class LineChartComponent extends Component {
                     if (data[d - 1].x.length > 11 - (2 * (data.length - 3))) {
                       return "start"
                     }
-                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
-                    // return "middle"
                     return "middle"
                   }, angle: (d) => {
                     if (data.length < 4) {
@@ -243,7 +345,12 @@ export default class LineChartComponent extends Component {
                 if (linechartstyles.toggle_label) { return d.y }
                 return ""
               }}
-              labelComponent={<VictoryLabel dy={15} />}
+              labelComponent={<VictoryLabel dy = {(d) =>  {
+                
+                if(d.y === max.y){
+                  return 30
+                } 
+                return -5}} />}
 
             />
             <VictoryPortal>
@@ -269,8 +376,7 @@ export default class LineChartComponent extends Component {
             </VictoryPortal>
 
           </VictoryChart>
-        </svg>
-
+          </VictoryContainer>
       </View>)
     }
     return (<View style={{ flex: 1, alignSelf: 'stretch' }} onLayout={this.onLayout}>

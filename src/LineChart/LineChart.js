@@ -1,12 +1,17 @@
 //import Icon from "./_laska_/Icon";
 import React, { Component } from 'react'
 
+import { View } from 'react-native'
+
 import {
-  View,
-
-} from 'react-native'
-
-import { VictoryLine, VictoryChart, VictoryScatter, VictoryAxis, VictoryLabel, VictoryPortal, VictoryClipContainer } from "victory-native"
+  VictoryLine,
+  VictoryChart,
+  VictoryScatter,
+  VictoryAxis,
+  VictoryLabel,
+  VictoryPortal,
+  VictoryClipContainer,
+} from "victory-native"
 
 export default class LineChartComponent extends Component {
 
@@ -58,34 +63,61 @@ export default class LineChartComponent extends Component {
             minDomain={{ y: 0 }}
             maxDomain={{ y: max.y + 1 }}
           >
-            <VictoryLabel text={linechartstyles.chart_title} x={27} y={15} textAnchor="start" style={{ fontFamily: "inherit", fontSize: (16 * 1.3), fill: "#212121" }} />
-            <VictoryLabel text={linechartstyles.chart_subtitle} x={27} y={30} textAnchor="start" style={{ fontFamily: "inherit", fontSize: (12 * 1.3), fill: "#BABABA" }} />
+            <VictoryLabel
+              text={linechartstyles.chart_title}
+              x={27}
+              y={15}
+              textAnchor="start"
+              style={{
+                fontFamily: 'inherit',
+                fontSize: (16 * 1.3),
+                fill: '#212121',
+              }}
+            />
+            <VictoryLabel
+              text={linechartstyles.chart_subtitle}
+              x={27}
+              y={30}
+              textAnchor="start"
+              style={{
+                fontFamily: 'inherit',
+                fontSize: (12 * 1.3),
+                fill: '#BABABA'
+              }}
+            />
             <VictoryAxis dependentAxis
               label={linechartstyles.y_axis_label}
               style={{
-                axis: { stroke: "transparent" },
-                grid: { stroke: "#E0E0E0" },
-                tickLabels: { fontFamily: "inherit", fontSize: 13, fill: "#BDBDBD" },
-                axisLabel: { fontFamily: "inherit", fontSize: 13, padding: 30, fill: "#BDBDBD" }
-              }} />
-
-            <VictoryAxis tickFormat={(t) => {
-              if (data.length == 2) {
-                if (t.length > 24) {
-                  return t.substring(0, 25)
+                axis: { stroke: 'transparent' },
+                grid: { stroke: '#E0E0E0' },
+                tickLabels: {
+                  fontFamily: 'inherit',
+                  fontSize: 13,
+                  fill: '#BDBDBD'
+                },
+                axisLabel: {
+                  fontFamily: 'inherit',
+                  fontSize: 13,
+                  padding: 30,
+                  fill: '#BDBDBD',
                 }
-              }
-              if (data.length > 2) {
-                if (t.length >= 14) {
-
-                  return t.substring(0, 13)
+              }}
+            />
+            <VictoryAxis
+              tickFormat={(t) => {
+                if (data.length == 2) {
+                  if (t.length > 24) {
+                    return t.substring(0, 25)
+                  }
                 }
 
-
-              }
-              return t
-            }}
-
+                if (data.length > 2) {
+                  if (t.length >= 14) {
+                    return t.substring(0, 13)
+                  }
+                }
+                return t
+              }}
               label={linechartstyles.x_axis_label}
               style={{
                 axis: { stroke: "#9E9E9E" },

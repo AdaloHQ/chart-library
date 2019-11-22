@@ -52,18 +52,6 @@
     "style-loader": "^0.23.1"
   },
   "dependencies": {
-    "@protonapp/react-native-material-ui": "^2.0.2",
-    "axios": "^0.18.0",
-    "color": "^3.1.0",
-    "prettier": "^1.19.1",
-    "qs": "^6.6.0",
-    "react-measure": "^2.3.0",
-    "react-native-credit-card": "^0.1.9",
-    "react-native-hyperlink": "^0.0.14",
-    "react-native-hyperlinked-text": "^1.0.1",
-    "react-native-svg-uri": "^1.2.3",
-    "react-native-vector-icons": "^6.4.0",
-    "resize-observer-polyfill": "^1.5.1",
     "victory-native": "^32.0.2"
   }
 }

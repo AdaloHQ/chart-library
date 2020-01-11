@@ -1,7 +1,7 @@
 //import Icon from "./_laska_/Icon";
 import React, { Component } from 'react'
 
-import { View } from 'react-native'
+import { View, Platform } from 'react-native'
 
 import {
   VictoryBar,
@@ -9,6 +9,10 @@ import {
   VictoryAxis,
   VictoryLabel,
 } from 'victory-native'
+
+import Svg from './Svg'
+
+const getFontFamily = () => Platform.OS === 'web' ? 'inherit' : 'System'
 
 export default class BarChartComponent extends Component {
   constructor(props) {
@@ -31,9 +35,13 @@ export default class BarChartComponent extends Component {
     let { barchartdesc, barchartstyles, editor } = this.props
     let width = this.props._width
     let height = this.props._height
+
+    let fontFamily = getFontFamily()
+
     if (!barchartdesc) {
       return null
     }
+
     if (editor) {
       for (let i = 0; i < barchartdesc.length; ++i) {
         let variables = barchartdesc[i]
@@ -43,10 +51,11 @@ export default class BarChartComponent extends Component {
       data.push({ x: barchartdesc[0].xaxis + ' ' + 4, y: 10 })
       data.push({ x: barchartdesc[0].xaxis + ' ' + 5, y: 10 })
       return (
-        <svg
+        <Svg
           viewBox={'0 0' + ' ' + width + ' ' + height}
           preserveAspectRatio="none"
           width="100%"
+          height={height}
         >
           <VictoryChart
             domainPadding={{ x: 40 }}
@@ -61,7 +70,7 @@ export default class BarChartComponent extends Component {
               y={15}
               textAnchor="start"
               style={{
-                fontFamily: 'inherit',
+                fontFamily,
                 fontSize: 16 * 1.3,
                 fill: '#212121',
               }}
@@ -72,7 +81,7 @@ export default class BarChartComponent extends Component {
               y={30}
               textAnchor="start"
               style={{
-                fontFamily: 'inherit',
+                fontFamily,
                 fontSize: 12 * 1.3,
                 fill: '#BABABA',
               }}
@@ -84,13 +93,13 @@ export default class BarChartComponent extends Component {
                 axis: { stroke: 'transparent' },
                 grid: { stroke: '#E0E0E0' },
                 tickLabels: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 9 * 1.3,
                   padding: 10,
                   fill: '#9E9E9E',
                 },
                 axisLabel: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 13,
                   padding: 30,
                   fill: '#BDBDBD',
@@ -115,7 +124,7 @@ export default class BarChartComponent extends Component {
               style={{
                 axis: { stroke: '#9E9E9E' },
                 tickLabels: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 9 * 1.3,
                   padding: 10,
                   fill: '#9E9E9E',
@@ -143,7 +152,7 @@ export default class BarChartComponent extends Component {
                   },
                 },
                 axisLabel: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 9 * 1.3,
                   padding: 40,
                   fill: '#9E9E9E',
@@ -154,7 +163,7 @@ export default class BarChartComponent extends Component {
               style={{
                 data: { fill: barchartstyles.bar_color },
                 labels: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 11 * 1.3,
                   fill: '#424242',
                 },
@@ -169,7 +178,7 @@ export default class BarChartComponent extends Component {
               labelComponent={<VictoryLabel dy={10} />}
             />
           </VictoryChart>
-        </svg>
+        </Svg>
       )
     }
 
@@ -182,10 +191,11 @@ export default class BarChartComponent extends Component {
     if (this.state.width) {
       return (
         <View>
-          <svg
+          <Svg
             viewBox={'0 0' + ' ' + this.state.width + ' ' + height}
             preserveAspectRatio="none"
             width="100%"
+            height={height}
           >
             <VictoryChart
               domainPadding={{ x: 40 }}
@@ -199,7 +209,7 @@ export default class BarChartComponent extends Component {
                 y={15}
                 textAnchor="start"
                 style={{
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 16 * 1.3,
                   fill: '#212121',
                 }}
@@ -210,7 +220,7 @@ export default class BarChartComponent extends Component {
                 y={30}
                 textAnchor="start"
                 style={{
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 12 * 1.3,
                   fill: '#BABABA',
                 }}
@@ -222,12 +232,12 @@ export default class BarChartComponent extends Component {
                   axis: { stroke: 'transparent' },
                   grid: { stroke: '#E0E0E0' },
                   tickLabels: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 10 * 1.3,
                     fill: '#BDBDBD',
                   },
                   axisLabel: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 10 * 1.3,
                     padding: 30,
                     fill: '#BDBDBD',
@@ -252,7 +262,7 @@ export default class BarChartComponent extends Component {
                 style={{
                   axis: { stroke: '#9E9E9E' },
                   tickLabels: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 9 * 1.3,
                     padding: 10,
                     fill: '#9E9E9E',
@@ -280,7 +290,7 @@ export default class BarChartComponent extends Component {
                     },
                   },
                   axisLabel: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 9 * 1.3,
                     padding: 40,
                     fill: '#9E9E9E',
@@ -291,7 +301,7 @@ export default class BarChartComponent extends Component {
                 style={{
                   data: { fill: barchartstyles.bar_color },
                   labels: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 11 * 1.3,
                     fill: '#424242',
                   },
@@ -316,7 +326,7 @@ export default class BarChartComponent extends Component {
                 labelComponent={<VictoryLabel dy={10} />}
               />
             </VictoryChart>
-          </svg>
+          </Svg>
         </View>
       )
     }

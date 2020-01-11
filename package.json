@@ -7,6 +7,7 @@
     "build": "proton build",
     "publish": "S3_BUCKET=proton-libraries S3_REGION=us-east-1 proton publish",
     "start": "FOUNDRY_DEV_SERVER=http://localhost:3035 npx foundry dev",
+    "copy": "rm -rf ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/src/ && cp -r src ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/src && cp -r index.js ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/index.js",
     "prettier": "prettier --write *.js src/*.js \"src/**/*.js\""
   },
   "author": "Kedar Bell",

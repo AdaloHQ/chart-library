@@ -12,7 +12,7 @@ import {
 
 import Svg from './Svg'
 
-const getFontFamily = () => Platform.OS === 'web' ? 'inherit' : 'System'
+const getFontFamily = () => (Platform.OS === 'web' ? 'inherit' : 'System')
 
 export default class BarChartComponent extends Component {
   constructor(props) {

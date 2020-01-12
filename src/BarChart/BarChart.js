@@ -10,7 +10,7 @@ import {
   VictoryLabel,
 } from 'victory-native'
 
-import Svg from './Svg'
+import Svg from '../Svg'
 
 const getFontFamily = () => (Platform.OS === 'web' ? 'inherit' : 'System')
 

@@ -1,7 +1,7 @@
 //import Icon from "./_laska_/Icon";
 import React, { Component } from 'react'
 
-import { View } from 'react-native'
+import { View, Platform } from 'react-native'
 
 import {
   VictoryLine,
@@ -12,6 +12,10 @@ import {
   VictoryPortal,
   VictoryClipContainer,
 } from 'victory-native'
+
+import Svg from '../Svg'
+
+const getFontFamily = () => (Platform.OS === 'web' ? 'inherit' : 'System')
 
 export default class LineChartComponent extends Component {
   constructor(props) {
@@ -34,9 +38,12 @@ export default class LineChartComponent extends Component {
     let { linechartdesc, linechartstyles, editor } = this.props
     let width = this.props._width
     let height = this.props._height
+
     if (!linechartdesc) {
       return null
     }
+
+    let fontFamily = getFontFamily()
 
     if (editor) {
       data = [
@@ -51,10 +58,11 @@ export default class LineChartComponent extends Component {
       )
 
       return (
-        <svg
+        <Svg
           viewBox={'0 0' + ' ' + width + ' ' + height}
           preserveAspectRatio="none"
           width="100%"
+          height={height}
         >
           <VictoryChart
             domainPadding={{ x: 40 }}
@@ -70,7 +78,7 @@ export default class LineChartComponent extends Component {
               y={15}
               textAnchor="start"
               style={{
-                fontFamily: 'inherit',
+                fontFamily,
                 fontSize: 16 * 1.3,
                 fill: '#212121',
               }}
@@ -81,7 +89,7 @@ export default class LineChartComponent extends Component {
               y={30}
               textAnchor="start"
               style={{
-                fontFamily: 'inherit',
+                fontFamily,
                 fontSize: 12 * 1.3,
                 fill: '#BABABA',
               }}
@@ -93,12 +101,12 @@ export default class LineChartComponent extends Component {
                 axis: { stroke: 'transparent' },
                 grid: { stroke: '#E0E0E0' },
                 tickLabels: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 13,
                   fill: '#BDBDBD',
                 },
                 axisLabel: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 13,
                   padding: 30,
                   fill: '#BDBDBD',
@@ -125,7 +133,7 @@ export default class LineChartComponent extends Component {
                 axis: { stroke: '#9E9E9E' },
                 grid: { stroke: '#E0E0E0' },
                 tickLabels: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 9 * 1.3,
                   padding: 10,
                   fill: '#9E9E9E',
@@ -153,7 +161,7 @@ export default class LineChartComponent extends Component {
                   },
                 },
                 axisLabel: {
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 9 * 1.3,
                   padding: 25,
                   fill: '#9E9E9E',
@@ -174,6 +182,7 @@ export default class LineChartComponent extends Component {
               }}
               labelComponent={<VictoryLabel dy={15} />}
             />
+            {/*
             <VictoryPortal>
               <VictoryScatter
                 style={{
@@ -189,8 +198,9 @@ export default class LineChartComponent extends Component {
                 data={data}
               />
             </VictoryPortal>
+            */}
           </VictoryChart>
-        </svg>
+        </Svg>
       )
     }
     data = []
@@ -205,10 +215,11 @@ export default class LineChartComponent extends Component {
     if (this.state.width) {
       return (
         <View>
-          <svg
+          <Svg
             viewBox={'0 0' + ' ' + this.state.width + ' ' + height}
             preserveAspectRatio="none"
             width="100%"
+            height={height}
           >
             <VictoryChart
               domainPadding={{ x: 40 }}
@@ -223,7 +234,7 @@ export default class LineChartComponent extends Component {
                 y={15}
                 textAnchor="start"
                 style={{
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 16 * 1.3,
                   fill: '#212121',
                 }}
@@ -234,7 +245,7 @@ export default class LineChartComponent extends Component {
                 y={30}
                 textAnchor="start"
                 style={{
-                  fontFamily: 'inherit',
+                  fontFamily,
                   fontSize: 12 * 1.3,
                   fill: '#BABABA',
                 }}
@@ -246,12 +257,12 @@ export default class LineChartComponent extends Component {
                   axis: { stroke: 'transparent' },
                   grid: { stroke: '#E0E0E0' },
                   tickLabels: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 10 * 1.3,
                     fill: '#BDBDBD',
                   },
                   axisLabel: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 10 * 1.3,
                     padding: 30,
                     fill: '#BDBDBD',
@@ -277,7 +288,7 @@ export default class LineChartComponent extends Component {
                   axis: { stroke: '#9E9E9E' },
                   grid: { stroke: '#E0E0E0' },
                   tickLabels: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 9 * 1.3,
                     padding: 10,
                     fill: '#9E9E9E',
@@ -305,7 +316,7 @@ export default class LineChartComponent extends Component {
                     },
                   },
                   axisLabel: {
-                    fontFamily: 'inherit',
+                    fontFamily,
                     fontSize: 9 * 1.3,
                     padding: 25,
                     fill: '#9E9E9E',
@@ -329,6 +340,7 @@ export default class LineChartComponent extends Component {
                 }}
                 labelComponent={<VictoryLabel dy={15} />}
               />
+              {/*
               <VictoryPortal>
                 <VictoryScatter
                   style={{
@@ -354,8 +366,9 @@ export default class LineChartComponent extends Component {
                   ]}
                 />
               </VictoryPortal>
+              */}
             </VictoryChart>
-          </svg>
+          </Svg>
         </View>
       )
     }

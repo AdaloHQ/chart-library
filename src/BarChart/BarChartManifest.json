@@ -4,7 +4,7 @@
   "defaultWidth": 337,
   "defaultHeight": 237,
   "component": "./BarChart.js",
-  "resizeY":true,
+  "resizeY": true,
   "props": [
     {
       "name": "barchartdesc",
@@ -12,28 +12,29 @@
       "type": "list"
     },
     {
-      "name":"yaxis",
+      "name": "yaxis",
       "displayName": "Y Axis Value",
-      "type":"number",
+      "type": "number",
       "role": "listItem",
-      "reference":"barchartdesc"
+      "reference": "barchartdesc"
     },
     {
-      "name":"xaxis",
+      "name": "xaxis",
       "displayName": "X Axis Value",
-      "type":"text",
+      "type": "text",
       "default": "IV",
       "role": "listItem",
-      "reference":"barchartdesc"
+      "reference": "barchartdesc"
     },
     {
-      "name":"baraction",
-      "displayName":"Bar Action",
+      "name": "baraction",
+      "displayName": "Click Actions",
       "type": "action",
       "role": "listItem",
-      "reference":"barchartdesc"
+      "reference": "barchartdesc"
     }
-  ],"childComponents": [
+  ],
+  "childComponents": [
     {
       "name": "barchartstyles",
       "displayName": "Styles",
@@ -51,16 +52,16 @@
           "default": ""
         },
         {
-          "name":"y_axis_label",
+          "name": "y_axis_label",
           "displayName": "Y Axis Label",
-          "type":"text",
-          "default":""
+          "type": "text",
+          "default": ""
         },
         {
           "name": "x_axis_label",
           "displayName": "X Axis Label",
-          "type":"text",
-          "default":""
+          "type": "text",
+          "default": ""
         },
         {
           "name": "bar_color",
@@ -71,11 +72,9 @@
         {
           "name": "toggle_label",
           "displayName": "Toggle Y Labels",
-          "type":"boolean"
+          "type": "boolean"
         }
       ]
     }
-  
   ]
 }
-

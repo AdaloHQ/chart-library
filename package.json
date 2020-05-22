@@ -6,7 +6,10 @@
   "scripts": {
     "build": "proton build",
     "publish": "S3_BUCKET=proton-libraries S3_REGION=us-east-1 proton publish",
-    "start": "FOUNDRY_DEV_SERVER=http://localhost:3035 npx foundry dev",
+    "start": "adalo dev",
+    "start:local": "ADALO_DEV_SERVER=http://localhost:3035 yarn start",
+    "login": "adalo login",
+"login:local": "ADALO_BACKEND_SERVER=http://localhost:8084 yarn run login",
     "copy": "rm -rf ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/src/ && cp -r src ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/src && cp -r index.js ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/index.js",
     "prettier": "prettier --write *.js src/*.js \"src/**/*.js\""
   },
@@ -36,7 +39,6 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "@protonapp/proton-cli": "^0.0.23",
     "@storybook/addon-actions": "^4.0.2",
     "@storybook/addon-links": "^4.0.2",
     "@storybook/addons": "^4.0.2",
@@ -54,6 +56,7 @@
     "style-loader": "^0.23.1"
   },
   "dependencies": {
+    "@adalo/cli": "^0.0.30",
     "react-native-svg": "9.13.3",
     "victory-native": "^32.0.2"
   }

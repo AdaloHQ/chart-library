@@ -34,14 +34,12 @@ export default class LineChartComponent extends Component {
   }
 
   render() {
-    let data, max
+    let data = [{ x: 'no value 1', y: 0 }]
+
+    let max
     let { linechartdesc, linechartstyles, editor } = this.props
     let width = this.props._width
     let height = this.props._height
-
-    if (!linechartdesc) {
-      return null
-    }
 
     let fontFamily = getFontFamily()
 
@@ -145,8 +143,6 @@ export default class LineChartComponent extends Component {
                     if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
                       return 'start'
                     }
-                    // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
-                    // return "middle"
                     return 'middle'
                   },
                   angle: d => {
@@ -182,37 +178,26 @@ export default class LineChartComponent extends Component {
               }}
               labelComponent={<VictoryLabel dy={15} />}
             />
-            {/*
-            <VictoryPortal>
-              <VictoryScatter
-                style={{
-                  data: {
-                    fill: () => {
-                      if (linechartstyles.toggle_point) {
-                        return 'black'
-                      }
-                      return 'transparent'
-                    },
-                  },
-                }}
-                data={data}
-              />
-            </VictoryPortal>
-            */}
           </VictoryChart>
         </Svg>
       )
     }
-    data = []
-    for (let i = 0; i < linechartdesc.length; ++i) {
-      let variables = linechartdesc[i]
 
-      data.push({ x: variables.xaxis, y: variables.yaxis })
+    if (
+      typeof linechartdesc !== 'undefined' &&
+      typeof linechartdesc !== 'null' &&
+      linechartdesc.length !== 0
+    ) {
+      data = []
+      for (let i = 0; i < linechartdesc.length; ++i) {
+        let variables = linechartdesc[i]
+
+        data.push({ x: variables.xaxis, y: variables.yaxis })
+      }
     }
 
-    max = data.reduce((prev, current) => (prev.y > current.y ? prev : current))
-
     if (this.state.width) {
+      console.log('linechartdesc', linechartdesc)
       return (
         <View>
           <Svg
@@ -300,8 +285,6 @@ export default class LineChartComponent extends Component {
                       if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
                         return 'start'
                       }
-                      // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
-                      // return "middle"
                       return 'middle'
                     },
                     angle: d => {
@@ -340,33 +323,6 @@ export default class LineChartComponent extends Component {
                 }}
                 labelComponent={<VictoryLabel dy={15} />}
               />
-              {/*
-              <VictoryPortal>
-                <VictoryScatter
-                  style={{
-                    data: {
-                      fill: () => {
-                        if (linechartstyles.toggle_point) {
-                          return 'black'
-                        }
-                        return 'transparent'
-                      },
-                    },
-                  }}
-                  data={data}
-                  events={[
-                    {
-                      target: 'data',
-                      eventHandlers: {
-                        onClick: (d, i) => {
-                          linechartdesc[i.index].pointaction()
-                        },
-                      },
-                    },
-                  ]}
-                />
-              </VictoryPortal>
-              */}
             </VictoryChart>
           </Svg>
         </View>

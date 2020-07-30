@@ -1,6 +1,6 @@
 {
   "name": "@protonapp/barchart-component",
-  "version": "0.0.10",
+  "version": "0.0.9",
   "description": "Chart Components Component for Foundry",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,8 @@
   },
   "author": "Kedar Bell",
   "license": "ISC",
-  "proton": {
+  "adalo": {
+    "logo": "./bar-chart-logo.png",
     "displayName": "Charts",
     "components": [
       {
@@ -57,7 +58,7 @@
     "style-loader": "^0.23.1"
   },
   "dependencies": {
-    "@adalo/cli": "^0.0.30",
+    "@adalo/cli": "^0.0.39",
     "react-native-svg": "9.13.3",
     "victory-native": "^32.0.2"
   }

@@ -4,7 +4,7 @@
   "defaultWidth": 337,
   "defaultHeight": 237,
   "component": "./LineChart.js",
-  "resizeY":true,
+  "resizeY": true,
   "props": [
     {
       "name": "linechartdesc",
@@ -12,27 +12,28 @@
       "type": "list"
     },
     {
-      "name":"xaxis",
+      "name": "xaxis",
       "displayName": "X Axis Value",
-      "type":"text",
+      "type": "text",
       "role": "listItem",
-      "reference":"linechartdesc"
+      "reference": "linechartdesc"
     },
     {
-      "name":"yaxis",
+      "name": "yaxis",
       "displayName": "Y Axis Value",
-      "type":"number",
+      "type": "number",
       "role": "listItem",
-      "reference":"linechartdesc"
+      "reference": "linechartdesc"
     },
     {
-      "name":"pointaction",
-      "displayName":"Point Action",
+      "name": "pointaction",
+      "displayName": "Point Action",
       "type": "action",
       "role": "listItem",
-      "reference":"linechartdesc"
+      "reference": "linechartdesc"
     }
-  ],"childComponents": [
+  ],
+  "childComponents": [
     {
       "name": "linechartstyles",
       "displayName": "Styles",
@@ -41,25 +42,49 @@
           "name": "chart_title",
           "displayName": "Chart Title",
           "type": "text",
-          "default": ""
+          "default": "",
+          "styles": {
+            "fontFamily": "@heading",
+            "fontWeight": "400",
+            "fontSize": "21",
+            "color": "#212121"
+          }
         },
         {
           "name": "chart_subtitle",
           "displayName": "Chart Subtitle",
           "type": "text",
-          "default": ""
+          "default": "",
+          "styles": {
+            "fontFamily": "@body",
+            "fontWeight": "400",
+            "fontSize": "16",
+            "color": "#BABABA"
+          }
         },
         {
-          "name":"y_axis_label",
+          "name": "y_axis_label",
           "displayName": "Y Axis Label",
-          "type":"text",
-          "default":""
+          "type": "text",
+          "default": "",
+          "styles": {
+            "fontFamily": "@body",
+            "fontWeight": "400",
+            "fontSize": "13",
+            "color": "#BDBDBD"
+          }
         },
         {
           "name": "x_axis_label",
           "displayName": "X Axis Label",
-          "type":"text",
-          "default":""
+          "type": "text",
+          "default": "",
+          "styles": {
+            "fontFamily": "@body",
+            "fontWeight": "400",
+            "fontSize": "12",
+            "color": "#9E9E9E"
+          }
         },
         {
           "name": "line_color",
@@ -70,16 +95,14 @@
         {
           "name": "toggle_point",
           "displayName": "Toggle Data Points",
-          "type":"boolean"
+          "type": "boolean"
         },
         {
           "name": "toggle_label",
           "displayName": "Toggle Y Labels",
-          "type":"boolean"
+          "type": "boolean"
         }
       ]
     }
-  
   ]
 }
-

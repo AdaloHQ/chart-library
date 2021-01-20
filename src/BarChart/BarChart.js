@@ -63,7 +63,6 @@ export default class BarChartComponent extends Component {
         padding: 40,
       },
     }
-    console.log(customFontStyles.chart_title)
     if (editor) {
       for (let i = 0; i < barchartdesc.length; ++i) {
         let variables = barchartdesc[i]

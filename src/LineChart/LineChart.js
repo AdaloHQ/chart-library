@@ -43,6 +43,39 @@ export default class LineChartComponent extends Component {
 
     let fontFamily = getFontFamily()
 
+    if (this.props.linechartstyles && this.props.linechartstyles.styles) {
+      fontFamily = this.props.linechartstyles.styles.x_axis_label.fontFamily
+    }
+
+    const customFontStyles =
+      this.props.linechartstyles && this.props.linechartstyles.styles
+        ? {
+            chart_title: {
+              ...this.props.linechartstyles.styles.chart_title,
+              fill: this.props.linechartstyles.styles.chart_title.color,
+            },
+            chart_subtitle: {
+              ...this.props.linechartstyles.styles.chart_subtitle,
+              fill: this.props.linechartstyles.styles.chart_subtitle.color,
+            },
+            y_axis_label: {
+              ...this.props.linechartstyles.styles.y_axis_label,
+              fill: this.props.linechartstyles.styles.y_axis_label.color,
+              padding: 30,
+            },
+            x_axis_label: {
+              ...this.props.linechartstyles.styles.x_axis_label,
+              fill: this.props.linechartstyles.styles.x_axis_label.color,
+              padding: 25,
+            },
+          }
+        : {
+            chart_title: {},
+            chart_subtitle: {},
+            y_axis_label: {},
+            x_axis_label: {},
+          }
+
     if (editor) {
       data = [
         { x: linechartdesc[0].xaxis + '1', y: 2 },
@@ -54,27 +87,6 @@ export default class LineChartComponent extends Component {
       max = data.reduce((prev, current) =>
         prev.y > current.y ? prev : current
       )
-
-      const customFontStyles = {
-        chart_title: {
-          ...this.props.linechartstyles.styles.chart_title,
-          fill: this.props.linechartstyles.styles.chart_title.color,
-        },
-        chart_subtitle: {
-          ...this.props.linechartstyles.styles.chart_subtitle,
-          fill: this.props.linechartstyles.styles.chart_subtitle.color,
-        },
-        y_axis_label: {
-          ...this.props.linechartstyles.styles.y_axis_label,
-          fill: this.props.linechartstyles.styles.y_axis_label.color,
-          padding: 30,
-        },
-        x_axis_label: {
-          ...this.props.linechartstyles.styles.x_axis_label,
-          fill: this.props.linechartstyles.styles.x_axis_label.color,
-          padding: 25,
-        },
-      }
 
       return (
         <Svg
@@ -96,30 +108,24 @@ export default class LineChartComponent extends Component {
               x={27}
               y={15}
               textAnchor="start"
-              style={
-                this.props.linechartstyles.styles
-                  ? customFontStyles.chart_title
-                  : {
-                      fontFamily,
-                      fontSize: 16 * 1.3,
-                      fill: '#212121',
-                    }
-              }
+              style={{
+                fontFamily,
+                fontSize: 16 * 1.3,
+                fill: '#212121',
+                ...customFontStyles.chart_title,
+              }}
             />
             <VictoryLabel
               text={linechartstyles.chart_subtitle}
               x={27}
               y={30}
               textAnchor="start"
-              style={
-                this.props.linechartstyles.styles
-                  ? customFontStyles.chart_subtitle
-                  : {
-                      fontFamily,
-                      fontSize: 12 * 1.3,
-                      fill: '#BABABA',
-                    }
-              }
+              style={{
+                fontFamily,
+                fontSize: 12 * 1.3,
+                fill: '#BABABA',
+                ...customFontStyles.chart_subtitle,
+              }}
             />
             <VictoryAxis
               dependentAxis
@@ -132,14 +138,13 @@ export default class LineChartComponent extends Component {
                   fontSize: 13,
                   fill: '#BDBDBD',
                 },
-                axisLabel: this.props.linechartstyles.styles
-                  ? customFontStyles.y_axis_label
-                  : {
-                      fontFamily,
-                      fontSize: 13,
-                      padding: 30,
-                      fill: '#BDBDBD',
-                    },
+                axisLabel: {
+                  fontFamily,
+                  fontSize: 13,
+                  padding: 30,
+                  fill: '#BDBDBD',
+                  ...customFontStyles.y_axis_label,
+                },
               }}
             />
             <VictoryAxis
@@ -187,20 +192,20 @@ export default class LineChartComponent extends Component {
                     return 0
                   },
                 },
-                axisLabel: this.props.linechartstyles.styles
-                  ? customFontStyles.x_axis_label
-                  : {
-                      fontFamily,
-                      fontSize: 9 * 1.3,
-                      padding: 25,
-                      fill: '#9E9E9E',
-                    },
+                axisLabel: {
+                  fontFamily,
+                  fontSize: 9 * 1.3,
+                  padding: 25,
+                  fill: '#9E9E9E',
+                  ...customFontStyles.x_axis_label,
+                },
               }}
             />
             <VictoryLine
               style={{
                 data: { stroke: linechartstyles.line_color },
                 parent: { border: '1px solid #ccc' },
+                labels: { fontFamily: fontFamily },
               }}
               data={data}
               labels={d => {
@@ -255,6 +260,7 @@ export default class LineChartComponent extends Component {
                   fontFamily,
                   fontSize: 16 * 1.3,
                   fill: '#212121',
+                  ...customFontStyles.chart_title,
                 }}
               />
               <VictoryLabel
@@ -266,6 +272,7 @@ export default class LineChartComponent extends Component {
                   fontFamily,
                   fontSize: 12 * 1.3,
                   fill: '#BABABA',
+                  ...customFontStyles.chart_subtitle,
                 }}
               />
               <VictoryAxis
@@ -284,6 +291,7 @@ export default class LineChartComponent extends Component {
                     fontSize: 10 * 1.3,
                     padding: 30,
                     fill: '#BDBDBD',
+                    ...customFontStyles.y_axis_label,
                   },
                 }}
               />
@@ -336,6 +344,7 @@ export default class LineChartComponent extends Component {
                     fontSize: 9 * 1.3,
                     padding: 25,
                     fill: '#9E9E9E',
+                    ...customFontStyles.x_axis_label,
                   },
                 }}
               />
@@ -343,6 +352,7 @@ export default class LineChartComponent extends Component {
                 style={{
                   data: { stroke: linechartstyles.line_color },
                   parent: { border: '1px solid #ccc' },
+                  labels: { fontFamily: fontFamily },
                 }}
                 data={data}
                 groupComponent={

@@ -38,31 +38,41 @@ export default class BarChartComponent extends Component {
 
     let fontFamily = getFontFamily()
 
+    if (this.props.barchartstyles && this.props.barchartstyles.styles) {
+      fontFamily = this.props.barchartstyles.styles.x_axis_label.fontFamily
+    }
+
     if (!barchartdesc) {
       return null
     }
 
     //custom fonts additions
-    const customFontStyles = {
-      chart_title: {
-        ...this.props.barchartstyles.styles.chart_title,
-        fill: this.props.barchartstyles.styles.chart_title.color,
-      },
-      chart_subtitle: {
-        ...this.props.barchartstyles.styles.chart_subtitle,
-        fill: this.props.barchartstyles.styles.chart_subtitle.color,
-      },
-      y_axis_label: {
-        ...this.props.barchartstyles.styles.y_axis_label,
-        fill: this.props.barchartstyles.styles.y_axis_label.color,
-        padding: 30,
-      },
-      x_axis_label: {
-        ...this.props.barchartstyles.styles.x_axis_label,
-        fill: this.props.barchartstyles.styles.x_axis_label.color,
-        padding: 40,
-      },
-    }
+    const customFontStyles =
+      this.props.barchartstyles && this.props.barchartstyles.styles
+        ? {
+            chart_title: {
+              ...this.props.barchartstyles.styles.chart_title,
+              fill: this.props.barchartstyles.styles.chart_title.color,
+            },
+            chart_subtitle: {
+              ...this.props.barchartstyles.styles.chart_subtitle,
+              fill: this.props.barchartstyles.styles.chart_subtitle.color,
+            },
+            y_axis_label: {
+              ...this.props.barchartstyles.styles.y_axis_label,
+              fill: this.props.barchartstyles.styles.y_axis_label.color,
+            },
+            x_axis_label: {
+              ...this.props.barchartstyles.styles.x_axis_label,
+              fill: this.props.barchartstyles.styles.x_axis_label.color,
+            },
+          }
+        : {
+            chart_title: {},
+            chart_subtitle: {},
+            y_axis_label: {},
+            x_axis_label: {},
+          }
     if (editor) {
       for (let i = 0; i < barchartdesc.length; ++i) {
         let variables = barchartdesc[i]
@@ -90,30 +100,24 @@ export default class BarChartComponent extends Component {
               x={27}
               y={15}
               textAnchor="start"
-              style={
-                this.props.barchartstyles.styles
-                  ? customFontStyles.chart_title
-                  : {
-                      fontFamily,
-                      fontSize: 16 * 1.3,
-                      fill: '#212121',
-                    }
-              }
+              style={{
+                fontFamily,
+                fontSize: 16 * 1.3,
+                fill: '#212121',
+                ...customFontStyles.chart_title,
+              }}
             />
             <VictoryLabel
               text={barchartstyles.chart_subtitle}
               x={27}
               y={30}
               textAnchor="start"
-              style={
-                this.props.barchartstyles.styles
-                  ? customFontStyles.chart_subtitle
-                  : {
-                      fontFamily,
-                      fontSize: 12 * 1.3,
-                      fill: '#BABABA',
-                    }
-              }
+              style={{
+                fontFamily,
+                fontSize: 12 * 1.3,
+                fill: '#BABABA',
+                ...customFontStyles.chart_subtitle,
+              }}
             />
             <VictoryAxis
               dependentAxis
@@ -127,14 +131,13 @@ export default class BarChartComponent extends Component {
                   padding: 10,
                   fill: '#9E9E9E',
                 },
-                axisLabel: this.props.barchartstyles.styles
-                  ? customFontStyles.y_axis_label
-                  : {
-                      fontFamily,
-                      fontSize: 13,
-                      padding: 30,
-                      fill: '#BDBDBD',
-                    },
+                axisLabel: {
+                  fontFamily,
+                  fontSize: 13,
+                  padding: 30,
+                  fill: '#BDBDBD',
+                  ...customFontStyles.y_axis_label,
+                },
               }}
             />
             <VictoryAxis
@@ -182,14 +185,13 @@ export default class BarChartComponent extends Component {
                     return 0
                   },
                 },
-                axisLabel: this.props.barchartstyles.styles
-                  ? customFontStyles.x_axis_label
-                  : {
-                      fontFamily,
-                      fontSize: 9 * 1.3,
-                      padding: 40,
-                      fill: '#9E9E9E',
-                    },
+                axisLabel: {
+                  fontFamily,
+                  fontSize: 9 * 1.3,
+                  padding: 40,
+                  fill: '#9E9E9E',
+                  ...customFontStyles.x_axis_label,
+                },
               }}
             />
             <VictoryBar
@@ -245,6 +247,7 @@ export default class BarChartComponent extends Component {
                   fontFamily,
                   fontSize: 16 * 1.3,
                   fill: '#212121',
+                  ...customFontStyles.chart_title,
                 }}
               />
               <VictoryLabel
@@ -256,6 +259,7 @@ export default class BarChartComponent extends Component {
                   fontFamily,
                   fontSize: 12 * 1.3,
                   fill: '#BABABA',
+                  ...customFontStyles.chart_subtitle,
                 }}
               />
               <VictoryAxis
@@ -274,6 +278,7 @@ export default class BarChartComponent extends Component {
                     fontSize: 10 * 1.3,
                     padding: 30,
                     fill: '#BDBDBD',
+                    ...customFontStyles.y_axis_label,
                   },
                 }}
               />
@@ -327,6 +332,7 @@ export default class BarChartComponent extends Component {
                     fontSize: 9 * 1.3,
                     padding: 40,
                     fill: '#9E9E9E',
+                    ...customFontStyles.x_axis_label,
                   },
                 }}
               />

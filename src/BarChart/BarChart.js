@@ -32,7 +32,7 @@ export default class BarChartComponent extends Component {
 
   render() {
     let data = []
-    let { barchartdesc, barchartstyles, editor } = this.props
+    let { barchartdesc, barchartstyles, editor, _fonts } = this.props
     let width = this.props._width
     let height = this.props._height
 
@@ -40,6 +40,8 @@ export default class BarChartComponent extends Component {
 
     if (this.props.barchartstyles && this.props.barchartstyles.styles) {
       fontFamily = this.props.barchartstyles.styles.x_axis_label.fontFamily
+    } else if (_fonts) {
+      fontFamily = _fonts.body
     }
 
     if (!barchartdesc) {

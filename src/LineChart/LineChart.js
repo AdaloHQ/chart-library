@@ -37,7 +37,7 @@ export default class LineChartComponent extends Component {
     let data = [{ x: 'no value 1', y: 0 }]
 
     let max
-    let { linechartdesc, linechartstyles, editor } = this.props
+    let { linechartdesc, linechartstyles, editor, _fonts } = this.props
     let width = this.props._width
     let height = this.props._height
 
@@ -45,6 +45,8 @@ export default class LineChartComponent extends Component {
 
     if (this.props.linechartstyles && this.props.linechartstyles.styles) {
       fontFamily = this.props.linechartstyles.styles.x_axis_label.fontFamily
+    } else if (_fonts) {
+      fontFamily = _fonts.body
     }
 
     const customFontStyles =

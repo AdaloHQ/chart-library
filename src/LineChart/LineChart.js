@@ -78,6 +78,19 @@ export default class LineChartComponent extends Component {
             x_axis_label: {},
           }
 
+    // Prevent null values from being passed into android
+    // console.log('customFontStyles:', customFontStyles)
+
+    // if (Platform.OS === 'android') {
+    //   for (let styleObjKey of Object.keys(customFontStyles)) {
+    //     for (let styleKey of Object.keys(customFontStyles[styleObjKey])) {
+    //       if (customFontStyles[styleObjKey][styleKey] === null) {
+    //         delete customFontStyles[styleObjKey][styleKey]
+    //       }
+    //     }
+    //   }
+    // }
+
     if (editor) {
       data = [
         { x: linechartdesc[0].xaxis + '1', y: 2 },
@@ -235,9 +248,7 @@ export default class LineChartComponent extends Component {
         data.push({ x: variables.xaxis, y: variables.yaxis })
       }
     }
-
-    if (this.state.width) {
-      console.log('linechartdesc', linechartdesc)
+    if (this.state.width && !!linechartdesc) {
       return (
         <View>
           <Svg

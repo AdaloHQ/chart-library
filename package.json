@@ -58,7 +58,7 @@
     "style-loader": "^0.23.1"
   },
   "dependencies": {
-    "@adalo/cli": "^0.0.39",
+    "@adalo/cli": "^0.0.42",
     "react-native-svg": "9.13.3",
     "victory-native": "^32.0.2"
   }

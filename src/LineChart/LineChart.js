@@ -78,19 +78,6 @@ export default class LineChartComponent extends Component {
             x_axis_label: {},
           }
 
-    // Prevent null values from being passed into android
-    // console.log('customFontStyles:', customFontStyles)
-
-    // if (Platform.OS === 'android') {
-    //   for (let styleObjKey of Object.keys(customFontStyles)) {
-    //     for (let styleKey of Object.keys(customFontStyles[styleObjKey])) {
-    //       if (customFontStyles[styleObjKey][styleKey] === null) {
-    //         delete customFontStyles[styleObjKey][styleKey]
-    //       }
-    //     }
-    //   }
-    // }
-
     if (editor) {
       data = [
         { x: linechartdesc[0].xaxis + '1', y: 2 },

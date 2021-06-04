@@ -34,7 +34,10 @@ export default class LineChartComponent extends Component {
   }
 
   render() {
-    let data = [{ x: 'no value 1', y: 0 }]
+    let data = [
+      { x: '0', y: 0 },
+      { x: '0', y: 0 },
+    ]
 
     let max
     let { linechartdesc, linechartstyles, editor, _fonts } = this.props

@@ -229,7 +229,7 @@ export default class LineChartComponent extends Component {
     if (
       typeof linechartdesc !== 'undefined' &&
       typeof linechartdesc !== 'null' &&
-      linechartdesc.length !== 0
+      linechartdesc.length > 1
     ) {
       data = []
       for (let i = 0; i < linechartdesc.length; ++i) {

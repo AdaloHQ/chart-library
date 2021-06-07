@@ -34,7 +34,10 @@ export default class LineChartComponent extends Component {
   }
 
   render() {
-    let data = [{ x: 'no value 1', y: 0 }]
+    let data = [
+      { x: '0', y: 0 },
+      { x: '0', y: 0 },
+    ]
 
     let max
     let { linechartdesc, linechartstyles, editor, _fonts } = this.props
@@ -226,7 +229,7 @@ export default class LineChartComponent extends Component {
     if (
       typeof linechartdesc !== 'undefined' &&
       typeof linechartdesc !== 'null' &&
-      linechartdesc.length !== 0
+      linechartdesc.length > 1
     ) {
       data = []
       for (let i = 0; i < linechartdesc.length; ++i) {
@@ -235,9 +238,7 @@ export default class LineChartComponent extends Component {
         data.push({ x: variables.xaxis, y: variables.yaxis })
       }
     }
-
-    if (this.state.width) {
-      console.log('linechartdesc', linechartdesc)
+    if (this.state.width && !!linechartdesc) {
       return (
         <View>
           <Svg

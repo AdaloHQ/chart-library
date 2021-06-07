@@ -219,13 +219,15 @@ export default class BarChartComponent extends Component {
       )
     }
 
-    for (let i = 0; i < barchartdesc.length; ++i) {
-      let variables = barchartdesc[i]
+    if (!!barchartdesc) {
+      for (let i = 0; i < barchartdesc.length; ++i) {
+        let variables = barchartdesc[i]
 
-      data.push({ x: variables.xaxis, y: variables.yaxis })
+        data.push({ x: variables.xaxis, y: variables.yaxis })
+      }
     }
 
-    if (this.state.width) {
+    if (this.state.width && !!barchartdesc) {
       return (
         <View>
           <Svg

@@ -1,0 +1,157 @@
+{
+  "displayName": "Pie Chart",
+  "defaultWidth": 160,
+  "defaultHeight": 24,
+  "components": "./PieChart.js",
+  "icon": "./example-thumbnail.png",
+  "resizeY": true,
+
+  "props": [
+    {
+      "name": "items",
+      "displayName": "What is this a chart of?",
+      "type": "list"
+    },
+
+    {
+      "name": "sliceValue",
+      "displayName": "Slice Value",
+      "type": "number",
+      "role": "listItem",
+      "reference": "items"
+    },
+    {
+      "name": "sliceLabel",
+      "displayName": "Slice Label",
+      "type": "text",
+      "styles": {
+        "fontFamily": "@body",
+        "color": "@text",
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "role": "listItem",
+      "reference": "items"
+    },
+    {
+      "name": "sliceAction",
+      "displayName": "Slice Action",
+      "type": "action",
+      "role": "listItem",
+      "reference": "items"
+    }
+  ],
+  "childComponents": [
+    {
+      "name": "slices",
+      "displayName": "Slices",
+      "props": [
+        {
+          "name": "numberOfSlices",
+          "displayName": "Number of Slices",
+          "type": "number",
+          "default": 5,
+          "control": { "type": "slider", "max": 6, "min": 2 }
+        },
+        {
+          "name": "otherSliceLabel",
+          "displayName": "Other Slice Label",
+          "type": "text",
+          "default": "Other"
+        },
+        {
+          "name": "colorScheme",
+          "displayName": "Color Scheme",
+          "type": "number",
+          "default": 0,
+          "control": {
+            "type": "menu",
+            "options": [
+              { "label": "Monochromatic", "value": 0 },
+              { "label": "Custom", "value": 1 }
+            ]
+          }
+        },
+        {
+          "name": "monochromaticScheme",
+          "displayName": "Monochromatic Scheme",
+          "type": "color",
+          "default": "@primary",
+          "enabled": {
+            "colorScheme": 0
+          }
+        },
+        {
+          "name": "customColor1",
+          "displayName": "Slice 1 Color",
+          "type": "color",
+          "default": "@primary",
+          "enabled": {
+            "colorScheme": 1
+          }
+        },
+        {
+          "name": "customColor2",
+          "displayName": "Slice 2 Color",
+          "type": "color",
+          "default": "#757575",
+          "enabled": {
+            "colorScheme": 1
+          }
+        },
+        {
+          "name": "customColor3",
+          "displayName": "Slice 3 Color",
+          "type": "color",
+          "default": "#9e9e9e",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": [3, 4, 5, 6]
+          }
+        },
+        {
+          "name": "customColor4",
+          "displayName": "Slice 4 Color",
+          "type": "color",
+          "default": "#BDBDBD",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": [4, 5, 6]
+          }
+        },
+        {
+          "name": "customColor5",
+          "displayName": "Slice 5 Color",
+          "type": "color",
+          "default": "#E0E0E0",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": [5, 6]
+          }
+        },
+        {
+          "name": "customColor6",
+          "displayName": "Slice 6 Color",
+          "type": "color",
+          "default": "#EEEEEE",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": 6
+          }
+        }
+      ]
+    },
+    {
+      "name": "legend",
+      "displayName": "Legend",
+      "props": [
+        {
+          "name": "absoluteNumbers",
+          "displayName": "Show values as absolute numbers",
+          "type": "boolean",
+          "default": true
+        }
+      ]
+    }
+  ]
+}

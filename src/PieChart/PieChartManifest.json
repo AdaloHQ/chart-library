@@ -39,7 +39,13 @@
       "type": "action",
       "role": "listItem",
       "reference": "items"
-    }
+    },
+    {
+          "name": "showPercentages",
+          "displayName": "Show values as percentages",
+          "type": "boolean",
+          "default": false
+        }
   ],
   "childComponents": [
     {
@@ -138,18 +144,6 @@
             "colorScheme": 1,
             "numberOfSlices": 6
           }
-        }
-      ]
-    },
-    {
-      "name": "legend",
-      "displayName": "Legend",
-      "props": [
-        {
-          "name": "absoluteNumbers",
-          "displayName": "Show values as absolute numbers",
-          "type": "boolean",
-          "default": true
         }
       ]
     }

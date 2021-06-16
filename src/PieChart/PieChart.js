@@ -5,8 +5,15 @@ import { PieChart as ChartKitPie } from 'react-native-chart-kit'
 
 const PieChart = props => {
   console.log(props)
-  let { items, slices, legend, _width, _height, editor, styles, sliceAction } =
-    props
+  let {
+    items,
+    slices,
+    showPercentages,
+    _width,
+    _height,
+    editor,
+    styles,
+  } = props
   let {
     numberOfSlices,
     otherSliceLabel,
@@ -21,7 +28,6 @@ const PieChart = props => {
   } = slices
   let legendEnabled = true
   //TODO: check if we should keep this prop
-  let { absoluteNumbers } = legend
   //set label styling based on editor or passed props
   let labelStyles
   if (editor) {
@@ -116,29 +122,29 @@ const PieChart = props => {
 
   if (editor) {
     //preview data
-    data = [
-      {
-        name: 'Item 1',
-        value: 12,
-        color: colors[0],
+    data = []
+    for (let i = 0; i < numberOfSlices - 1; i++) {
+      let object = {
+        name: `Item ${i}`,
+        value: (numberOfSlices - i) * 10,
+        color: colors[i],
         legendFontColor: labelStyles.color,
         legendFontSize: labelStyles.fontSize,
-      },
-      {
-        name: 'Item 2',
-        value: 22,
-        color: colors[1],
-        legendFontColor: labelStyles.color,
-        legendFontSize: labelStyles.fontSize,
-      },
-      {
-        name: otherSliceLabel,
-        value: 10,
-        color: colors[2],
-        legendFontColor: labelStyles.color,
-        legendFontSize: labelStyles.fontSize,
-      },
-    ]
+        legendFontFamily: labelStyles.fontFamily,
+        legendFontWeight: labelStyles.fontWeight,
+      }
+      data.push(object)
+    }
+    let otherObject = {
+      name: `Other`,
+      value: 10,
+      color: colors[numberOfSlices - 1],
+      legendFontColor: labelStyles.color,
+      legendFontSize: labelStyles.fontSize,
+      legendFontFamily: labelStyles.fontFamily,
+      legendFontWeight: labelStyles.fontWeight,
+    }
+    data.push(otherObject)
   } else {
     data = items.map((item, index) => {
       return {
@@ -156,11 +162,6 @@ const PieChart = props => {
 
   //add the other slice if it exists
   if (otherValue > 0) {
-    let otherItem = {
-      id: numberOfSlices,
-      sliceValue: otherValue,
-      name: otherSliceLabel,
-    }
     otherObject = {
       name: otherSliceLabel,
       value: otherValue,
@@ -194,12 +195,11 @@ const PieChart = props => {
       accessor={'value'}
       backgroundColor={'transparent'}
       center={[xOffset, yOffset]}
-      absolute={absoluteNumbers}
+      absolute={!showPercentages}
       hasLegend={legendEnabled}
       avoidFalseZero
     />
   )
-  i
 }
 
 //hexToHSL function derived from https://css-tricks.com/converting-color-spaces-in-javascript/

@@ -4,7 +4,6 @@ import { PieChart as ChartKitPie } from 'react-native-chart-kit'
 //TODO: click action, issues caused by library limitation (label font weight, label wrapping), refactoring
 
 const PieChart = props => {
-  console.log(props)
   let {
     items,
     slices,

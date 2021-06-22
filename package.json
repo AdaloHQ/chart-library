@@ -63,8 +63,8 @@
   },
   "dependencies": {
     "@adalo/cli": "^0.0.42",
+    "react-native-chart-kit": "https://github.com/AdaloHQ/react-native-chart-kit.git",
     "react-native-svg": "9.13.3",
-    "victory-native": "^32.0.2",
-    "react-native-chart-kit": "https://github.com/AdaloHQ/react-native-chart-kit.git"
+    "victory-native": "^32.0.2"
   }
 }

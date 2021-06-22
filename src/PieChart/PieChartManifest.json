@@ -1,7 +1,7 @@
 {
   "displayName": "Pie Chart",
   "defaultWidth": 160,
-  "defaultHeight": 24,
+  "defaultHeight": 100,
   "components": "./PieChart.js",
   "icon": "./example-thumbnail.png",
   "resizeY": true,

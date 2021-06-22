@@ -41,11 +41,11 @@
       "reference": "items"
     },
     {
-          "name": "showPercentages",
-          "displayName": "Show values as percentages",
-          "type": "boolean",
-          "default": false
-        }
+      "name": "showPercentages",
+      "displayName": "Show values as percentages",
+      "type": "boolean",
+      "default": false
+    }
   ],
   "childComponents": [
     {

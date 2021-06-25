@@ -1,11 +1,10 @@
 {
   "displayName": "Pie Chart",
-  "defaultWidth": 160,
-  "defaultHeight": 100,
+  "defaultWidth": 362,
+  "defaultHeight": 218,
   "components": "./PieChart.js",
   "icon": "./example-thumbnail.png",
   "resizeY": true,
-
   "props": [
     {
       "name": "items",
@@ -45,6 +44,13 @@
       "displayName": "Show values as percentages",
       "type": "boolean",
       "default": false
+    },
+    {
+      "name": "chartWidthPercentage",
+      "displayName": "Chart Width (percentage)",
+      "type": "number",
+      "default": 50,
+      "control": { "type": "slider", "min": 25, "max": 100 }
     }
   ],
   "childComponents": [
@@ -54,7 +60,7 @@
       "props": [
         {
           "name": "numberOfSlices",
-          "displayName": "Number of Slices",
+          "displayName": "Maximum Number of Slices",
           "type": "number",
           "default": 5,
           "control": { "type": "slider", "max": 6, "min": 2 }

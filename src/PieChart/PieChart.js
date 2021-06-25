@@ -12,6 +12,7 @@ const PieChart = props => {
     _height,
     editor,
     styles,
+    chartWidthPercentage,
   } = props
   let {
     numberOfSlices,
@@ -26,6 +27,9 @@ const PieChart = props => {
     customColor6,
   } = slices
   let legendEnabled = true
+  if (chartWidthPercentage === 100) {
+    legendEnabled = false
+  }
   //TODO: check if we should keep this prop
   //set label styling based on editor or passed props
   let labelStyles
@@ -53,8 +57,9 @@ const PieChart = props => {
     width = _width
   const colorIncrement = 10
 
+  //TODO: remove this once the library accounts for height vs width
   if (legendEnabled) {
-    _height = _width / 1.62
+    // _height = _width / 1.62
   } else {
     _height = width
   }
@@ -138,7 +143,7 @@ const PieChart = props => {
       data.push(object)
     }
     let otherObject = {
-      name: `Other`,
+      name: `Other item take up alot of space for testing`,
       value: 10,
       color: colors[numberOfSlices - 1],
       legendFontColor: labelStyles.color,
@@ -148,6 +153,7 @@ const PieChart = props => {
     }
     data.push(otherObject)
   } else {
+    console.log(items)
     data = items.map((item, index) => {
       return {
         name: item.sliceLabel,
@@ -200,6 +206,7 @@ const PieChart = props => {
       absolute={!showPercentages}
       hasLegend={legendEnabled}
       avoidFalseZero
+      chartWidthPercentage={chartWidthPercentage}
     />
   )
 }

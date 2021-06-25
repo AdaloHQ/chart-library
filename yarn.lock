@@ -6911,7 +6911,7 @@ react-modal@^3.6.1:
 
 "react-native-chart-kit@https://github.com/AdaloHQ/react-native-chart-kit.git":
   version "6.11.0"
-  resolved "https://github.com/AdaloHQ/react-native-chart-kit.git#b9a5c975ea8f8d10c5789b2d2ccd8c33aa772e18"
+  resolved "https://github.com/AdaloHQ/react-native-chart-kit.git#98e3486c84af7becb26c49099dbbfb7a2321a1ac"
   dependencies:
     "@visx/text" "^1.10.0"
     lodash "^4.17.13"

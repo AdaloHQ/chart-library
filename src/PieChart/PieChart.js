@@ -30,6 +30,8 @@ const PieChart = props => {
   if (chartWidthPercentage === 100) {
     legendEnabled = false
   }
+
+  console.log('props:', props)
   //TODO: check if we should keep this prop
   //set label styling based on editor or passed props
   let labelStyles
@@ -69,33 +71,17 @@ const PieChart = props => {
     //create an array of light values that will be used for the colors of the scheme
     let hslBase = hexToHSL(monochromaticScheme),
       lValue = getLValue(hslBase),
-      lValues = [lValue],
-      upCount = 0,
-      downCount = 0
-    const possibleUp = (100 - lValue) / colorIncrement
-    const possibleDown = lValue / colorIncrement
+      lValues = [lValue]
 
     //create l values for a monochromatic scheme by creating an array of l values based on the base value
     let multiplier = 1
+    const increment = (100 - lValue) / numberOfSlices
+    console.log('lval:', lValue, 'increment', increment)
     for (let i = 0; i < numberOfSlices - 1; i++) {
-      if (i % 2 === 0) {
-        // go down
-        if (downCount <= possibleDown) {
-          lValues.push(lValue - colorIncrement * multiplier)
-        } else {
-          lValues.push(lValue + colorIncrement * multiplier)
-          multiplier += 1
-        }
-      } else {
-        // go up
-        if (upCount <= possibleUp) {
-          lValues.push(lValue + colorIncrement * multiplier)
-        } else {
-          lValues.push(lValue - colorIncrement * multiplier)
-        }
-        multiplier += 1
-      }
+      lValues.push(lValue + increment * multiplier)
+      multiplier += 1
     }
+    console.log('lvals:', lValues)
     lValues.sort((a, b) => (a > b ? 1 : -1))
     //generate colors array from hsl base and lValues
     colors = generateScheme(hslBase, lValues)
@@ -153,7 +139,6 @@ const PieChart = props => {
     }
     data.push(otherObject)
   } else {
-    console.log(items)
     data = items.map((item, index) => {
       return {
         name: item.sliceLabel,

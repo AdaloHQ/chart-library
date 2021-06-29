@@ -1,12 +1,13 @@
 import React from 'react'
-import { PieChart as ChartKitPie } from 'react-native-chart-kit'
-
-//TODO: click action, issues caused by library limitation (label font weight, label wrapping), refactoring
+import { PieChart as ChartKitPie } from '@adalo/react-native-chart-kit'
+import { View } from 'react-native'
 
 const PieChart = props => {
   let {
     items,
     slices,
+    chartScheme,
+    numberOfSlices,
     showPercentages,
     _width,
     _height,
@@ -15,7 +16,6 @@ const PieChart = props => {
     chartWidthPercentage,
   } = props
   let {
-    numberOfSlices,
     otherSliceLabel,
     colorScheme,
     monochromaticScheme,
@@ -25,29 +25,23 @@ const PieChart = props => {
     customColor4,
     customColor5,
     customColor6,
-  } = slices
+  } = chartScheme
   let legendEnabled = true
   if (chartWidthPercentage === 100) {
     legendEnabled = false
   }
 
-  console.log('props:', props)
-  //TODO: check if we should keep this prop
-  //set label styling based on editor or passed props
-  let labelStyles
-  if (editor) {
-    labelStyles = {
-      color: '#7e7e7e',
-      fontFamily: 'inherit',
-      fontSize: 15,
-      fontWeight: 600,
-    }
-  } else {
-    labelStyles = styles.sliceLabel
+  // console.log(props)
+  //set label styling based on  passed props
+  let labelStyles = {
+    color: slices.styles.label.color,
+    fontFamily: slices.styles.label.fontFamily,
+    fontSize: slices.styles.label.fontSize,
+    fontWeight: slices.styles.label.fontWeight,
   }
 
   if (!items) {
-    items = []
+    return <View></View>
   }
   let colors = [],
     otherSlices = [],
@@ -60,11 +54,11 @@ const PieChart = props => {
   const colorIncrement = 10
 
   //TODO: remove this once the library accounts for height vs width
-  if (legendEnabled) {
-    // _height = _width / 1.62
-  } else {
-    _height = width
-  }
+  // if (legendEnabled) {
+  //   // _height = _width / 1.62
+  // } else {
+  //   _height = width
+  // }
 
   if (colorScheme === 0) {
     //convert color to hsl and then get the light value
@@ -76,13 +70,10 @@ const PieChart = props => {
     //create l values for a monochromatic scheme by creating an array of l values based on the base value
     let multiplier = 1
     const increment = (100 - lValue) / numberOfSlices
-    console.log('lval:', lValue, 'increment', increment)
     for (let i = 0; i < numberOfSlices - 1; i++) {
       lValues.push(lValue + increment * multiplier)
       multiplier += 1
     }
-    console.log('lvals:', lValues)
-    lValues.sort((a, b) => (a > b ? 1 : -1))
     //generate colors array from hsl base and lValues
     colors = generateScheme(hslBase, lValues)
   } else if (colorScheme === 1) {
@@ -102,7 +93,8 @@ const PieChart = props => {
   }
 
   //sort items array big to little
-  items.sort((a, b) => (a.sliceValue < b.sliceValue ? 1 : -1))
+  items.sort((a, b) => (a.slices.sliceValue < b.slices.sliceValue ? 1 : -1))
+
   if (numberOfSlices < items.length) {
     //subtract 1 to account for the other slice
     otherSlices = items.slice(numberOfSlices - 1, items.length)
@@ -110,7 +102,7 @@ const PieChart = props => {
   }
 
   otherSlices.forEach(slice => {
-    otherValue += slice.sliceValue
+    otherValue += slice.slices.sliceValue
   })
 
   if (editor) {
@@ -118,7 +110,7 @@ const PieChart = props => {
     data = []
     for (let i = 0; i < numberOfSlices - 1; i++) {
       let object = {
-        name: `Item ${i}`,
+        name: `Item ${i + 1}`,
         value: (numberOfSlices - i) * 10,
         color: colors[i],
         legendFontColor: labelStyles.color,
@@ -129,7 +121,7 @@ const PieChart = props => {
       data.push(object)
     }
     let otherObject = {
-      name: `Other item take up alot of space for testing`,
+      name: otherSliceLabel,
       value: 10,
       color: colors[numberOfSlices - 1],
       legendFontColor: labelStyles.color,
@@ -140,15 +132,16 @@ const PieChart = props => {
     data.push(otherObject)
   } else {
     data = items.map((item, index) => {
+      // console.log('item:', item)
       return {
-        name: item.sliceLabel,
-        value: item.sliceValue,
+        name: item.slices.label,
+        value: item.slices.sliceValue,
         color: colors[index],
         legendFontColor: labelStyles.color,
         legendFontSize: labelStyles.fontSize,
         legendFontFamily: labelStyles.fontFamily,
         legendFontWeight: labelStyles.fontWeight,
-        action: item.sliceAction,
+        action: item.slices.sliceAction,
       }
     })
   }

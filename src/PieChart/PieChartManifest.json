@@ -9,35 +9,15 @@
     {
       "name": "items",
       "displayName": "What is this a chart of?",
-      "type": "list"
+      "type": "list",
+      "listControl": {"sort": false}
     },
-
     {
-      "name": "sliceValue",
-      "displayName": "Slice Value",
+      "name": "numberOfSlices",
+      "displayName": "Maximum Number of Slices",
       "type": "number",
-      "role": "listItem",
-      "reference": "items"
-    },
-    {
-      "name": "sliceLabel",
-      "displayName": "Slice Label",
-      "type": "text",
-      "styles": {
-        "fontFamily": "@body",
-        "color": "@text",
-        "fontSize": 12,
-        "fontWeight": 600
-      },
-      "role": "listItem",
-      "reference": "items"
-    },
-    {
-      "name": "sliceAction",
-      "displayName": "Slice Action",
-      "type": "action",
-      "role": "listItem",
-      "reference": "items"
+      "default": 5,
+      "control": { "type": "slider", "max": 6, "min": 2 }
     },
     {
       "name": "showPercentages",
@@ -57,14 +37,36 @@
     {
       "name": "slices",
       "displayName": "Slices",
+      "role": "listItem",
+      "reference": "items",
       "props": [
         {
-          "name": "numberOfSlices",
-          "displayName": "Maximum Number of Slices",
-          "type": "number",
-          "default": 5,
-          "control": { "type": "slider", "max": 6, "min": 2 }
+          "name": "label",
+          "displayName": "Slice Label",
+          "type": "text",
+          "styles": {
+            "fontFamily": "@body",
+            "color": "@text",
+            "fontSize": 12,
+            "fontWeight": 600
+          }
         },
+        {
+          "name": "sliceValue",
+          "displayName": "Slice Value",
+          "type": "number"
+        },
+        {
+          "name": "sliceAction",
+          "displayName": "Slice Action",
+          "type": "action"
+        }
+      ]
+    },
+    {
+      "name": "chartScheme",
+      "displayName": "Chart Scheme",
+      "props": [
         {
           "name": "otherSliceLabel",
           "displayName": "Other Slice Label",

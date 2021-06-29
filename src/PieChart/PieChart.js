@@ -12,7 +12,6 @@ const PieChart = props => {
     _width,
     _height,
     editor,
-    styles,
     chartWidthPercentage,
   } = props
   let {
@@ -31,7 +30,6 @@ const PieChart = props => {
     legendEnabled = false
   }
 
-  // console.log(props)
   //set label styling based on  passed props
   let labelStyles = {
     color: slices.styles.label.color,
@@ -50,15 +48,6 @@ const PieChart = props => {
     otherObject,
     xOffset = 0,
     yOffset = 0,
-    width = _width
-  const colorIncrement = 10
-
-  //TODO: remove this once the library accounts for height vs width
-  // if (legendEnabled) {
-  //   // _height = _width / 1.62
-  // } else {
-  //   _height = width
-  // }
 
   if (colorScheme === 0) {
     //convert color to hsl and then get the light value
@@ -78,7 +67,6 @@ const PieChart = props => {
     colors = generateScheme(hslBase, lValues)
   } else if (colorScheme === 1) {
     //custom color scheme
-    //TODO: refactor this?
     colors.push(customColor1)
     colors.push(customColor2)
     colors.push(customColor3)
@@ -132,7 +120,6 @@ const PieChart = props => {
     data.push(otherObject)
   } else {
     data = items.map((item, index) => {
-      // console.log('item:', item)
       return {
         name: item.slices.label,
         value: item.slices.sliceValue,
@@ -156,7 +143,6 @@ const PieChart = props => {
       legendFontSize: labelStyles.fontSize,
       legendFontFamily: labelStyles.fontFamily,
       legendFontWeight: labelStyles.fontWeight,
-      // action: oh,
     }
     data.push(otherObject)
   }

@@ -7,7 +7,6 @@ const PieChart = props => {
     items,
     slices,
     chartScheme,
-    numberOfSlices,
     showPercentages,
     _width,
     _height,
@@ -24,7 +23,8 @@ const PieChart = props => {
     customColor4,
     customColor5,
     customColor6,
-  } = chartScheme
+    numberOfSlices,
+  } = slices
   let legendEnabled = true
   if (chartWidthPercentage === 100) {
     legendEnabled = false
@@ -47,7 +47,7 @@ const PieChart = props => {
     data,
     otherObject,
     xOffset = 0,
-    yOffset = 0,
+    yOffset = 0
 
   if (colorScheme === 0) {
     //convert color to hsl and then get the light value
@@ -171,6 +171,7 @@ const PieChart = props => {
       hasLegend={legendEnabled}
       avoidFalseZero
       chartWidthPercentage={chartWidthPercentage}
+      paddingLeft={16}
     />
   )
 }

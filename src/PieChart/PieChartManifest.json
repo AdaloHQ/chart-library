@@ -13,13 +13,6 @@
       "listControl": {"sort": false}
     },
     {
-      "name": "numberOfSlices",
-      "displayName": "Maximum Number of Slices",
-      "type": "number",
-      "default": 5,
-      "control": { "type": "slider", "max": 6, "min": 2 }
-    },
-    {
       "name": "showPercentages",
       "displayName": "Show values as percentages",
       "type": "boolean",
@@ -60,13 +53,14 @@
           "name": "sliceAction",
           "displayName": "Slice Action",
           "type": "action"
-        }
-      ]
-    },
-    {
-      "name": "chartScheme",
-      "displayName": "Chart Scheme",
-      "props": [
+        },
+        {
+          "name": "numberOfSlices",
+          "displayName": "Maximum Number of Slices",
+          "type": "number",
+          "default": 5,
+          "control": { "type": "slider", "max": 6, "min": 2 }
+        },
         {
           "name": "otherSliceLabel",
           "displayName": "Other Slice Label",

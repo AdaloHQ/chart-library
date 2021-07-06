@@ -53,7 +53,13 @@
           "name": "sliceAction",
           "displayName": "Slice Action",
           "type": "action"
-        },
+        }
+      ]
+    },
+    {
+      "name": "chartScheme",
+      "displayName": "Scheme",
+      "props": [
         {
           "name": "numberOfSlices",
           "displayName": "Maximum Number of Slices",

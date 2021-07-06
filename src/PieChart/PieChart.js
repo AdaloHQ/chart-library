@@ -1,6 +1,6 @@
 import React from 'react'
 import { PieChart as ChartKitPie } from '@adalo/react-native-chart-kit'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 const PieChart = props => {
   let {
@@ -13,8 +13,9 @@ const PieChart = props => {
     editor,
     chartWidthPercentage,
   } = props
+  // let {  } = slices
+
   let {
-    otherSliceLabel,
     colorScheme,
     monochromaticScheme,
     customColor1,
@@ -24,7 +25,8 @@ const PieChart = props => {
     customColor5,
     customColor6,
     numberOfSlices,
-  } = slices
+    otherSliceLabel,
+  } = chartScheme
   let legendEnabled = true
   if (chartWidthPercentage === 100) {
     legendEnabled = false
@@ -77,7 +79,7 @@ const PieChart = props => {
 
   //center the chart if the legend is turned off
   if (!legendEnabled) {
-    xOffset = _width / 4
+    xOffset =( _width / 4) - 8
   }
 
   //sort items array big to little
@@ -173,6 +175,7 @@ const PieChart = props => {
       chartWidthPercentage={chartWidthPercentage}
       paddingLeft={16}
     />
+    // <Text>Nothing is working</Text>
   )
 }
 

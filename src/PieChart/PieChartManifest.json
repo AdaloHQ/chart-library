@@ -13,6 +13,33 @@
       "listControl": {"sort": false}
     },
     {
+      "name": "label",
+      "displayName": "Slice Label",
+      "type": "text",
+      "styles": {
+        "fontFamily": "@body",
+        "color": "@text",
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "role": "listItem",
+      "reference": "items"
+    },
+    {
+      "name": "sliceValue",
+      "displayName": "Slice Value",
+      "type": "number",
+      "role": "listItem",
+      "reference": "items"
+    },
+    {
+      "name": "sliceAction",
+      "displayName": "Slice Action",
+      "type": "action",
+      "role": "listItem",
+      "reference": "items"
+    },
+    {
       "name": "showPercentages",
       "displayName": "Show values as percentages",
       "type": "boolean",
@@ -23,42 +50,13 @@
       "displayName": "Chart Width (percentage)",
       "type": "number",
       "default": 50,
-      "control": { "type": "slider", "min": 25, "max": 100 }
+      "control": { "type": "slider", "min": 25, "max": 50 }
     }
   ],
   "childComponents": [
     {
       "name": "slices",
       "displayName": "Slices",
-      "role": "listItem",
-      "reference": "items",
-      "props": [
-        {
-          "name": "label",
-          "displayName": "Slice Label",
-          "type": "text",
-          "styles": {
-            "fontFamily": "@body",
-            "color": "@text",
-            "fontSize": 12,
-            "fontWeight": 600
-          }
-        },
-        {
-          "name": "sliceValue",
-          "displayName": "Slice Value",
-          "type": "number"
-        },
-        {
-          "name": "sliceAction",
-          "displayName": "Slice Action",
-          "type": "action"
-        }
-      ]
-    },
-    {
-      "name": "chartScheme",
-      "displayName": "Scheme",
       "props": [
         {
           "name": "numberOfSlices",

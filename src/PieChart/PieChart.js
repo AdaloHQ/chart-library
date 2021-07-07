@@ -6,12 +6,15 @@ const PieChart = props => {
   let {
     items,
     slices,
-    chartScheme,
+    // label,
+    // sliceValue,
+    // sliceAction,
     showPercentages,
     _width,
     _height,
     editor,
     chartWidthPercentage,
+    styles,
   } = props
   // let {  } = slices
 
@@ -26,18 +29,21 @@ const PieChart = props => {
     customColor6,
     numberOfSlices,
     otherSliceLabel,
-  } = chartScheme
+  } = slices
   let legendEnabled = true
   if (chartWidthPercentage === 100) {
     legendEnabled = false
   }
 
   //set label styling based on  passed props
-  let labelStyles = {
-    color: slices.styles.label.color,
-    fontFamily: slices.styles.label.fontFamily,
-    fontSize: slices.styles.label.fontSize,
-    fontWeight: slices.styles.label.fontWeight,
+  let labelStyles = {}
+  if (!editor) {
+    labelStyles = {
+      color: styles.label.color,
+      fontFamily: styles.label.fontFamily,
+      fontSize: styles.label.fontSize,
+      fontWeight: styles.label.fontWeight,
+    }
   }
 
   if (!items) {
@@ -54,6 +60,14 @@ const PieChart = props => {
   if (colorScheme === 0) {
     //convert color to hsl and then get the light value
     //create an array of light values that will be used for the colors of the scheme
+
+    if (monochromaticScheme) {
+      let isHex = monochromaticScheme[0] === '#'
+      if (!isHex) {
+        monochromaticScheme = rgbaToHex(monochromaticScheme)
+      }
+    }
+
     let hslBase = hexToHSL(monochromaticScheme),
       lValue = getLValue(hslBase),
       lValues = [lValue]
@@ -79,11 +93,11 @@ const PieChart = props => {
 
   //center the chart if the legend is turned off
   if (!legendEnabled) {
-    xOffset =( _width / 4) - 8
+    xOffset = _width / 4 - 8
   }
 
   //sort items array big to little
-  items.sort((a, b) => (a.slices.sliceValue < b.slices.sliceValue ? 1 : -1))
+  items.sort((a, b) => (a.sliceValue < b.sliceValue ? 1 : -1))
 
   if (numberOfSlices < items.length) {
     //subtract 1 to account for the other slice
@@ -92,7 +106,7 @@ const PieChart = props => {
   }
 
   otherSlices.forEach(slice => {
-    otherValue += slice.slices.sliceValue
+    otherValue += slice.sliceValue
   })
 
   if (editor) {
@@ -123,14 +137,14 @@ const PieChart = props => {
   } else {
     data = items.map((item, index) => {
       return {
-        name: item.slices.label,
-        value: item.slices.sliceValue,
+        name: item.label,
+        value: item.sliceValue,
         color: colors[index],
         legendFontColor: labelStyles.color,
         legendFontSize: labelStyles.fontSize,
         legendFontFamily: labelStyles.fontFamily,
         legendFontWeight: labelStyles.fontWeight,
-        action: item.slices.sliceAction,
+        action: item.sliceAction,
       }
     })
   }
@@ -189,6 +203,7 @@ const hexToHSL = hex => {
   r = '0x' + hex[1] + hex[2]
   g = '0x' + hex[3] + hex[4]
   b = '0x' + hex[5] + hex[6]
+
   //get alpha
   if (hex.length == 9) {
     a = '0x' + hex[7] + hex[8]
@@ -230,6 +245,39 @@ const hexToHSL = hex => {
   }
 
   return 'hsl(' + h + ',' + s + '%,' + l + '%,' + a + ')'
+}
+
+//rgbaToHex derived from https://css-tricks.com/converting-color-spaces-in-javascript/
+const rgbaToHex = rgba => {
+  let vals = rgba
+    .split('(')
+    .pop()
+    .slice(0, -1)
+    .replace(/\s/g, '')
+    .split(',')
+    .map((num, index) => {
+      if (index === 3) {
+        return parseFloat(num)
+      } else {
+        return parseInt(num)
+      }
+    })
+  let r = vals[0],
+    g = vals[1],
+    b = vals[2],
+    a = vals[3]
+
+  r = r.toString(16)
+  g = g.toString(16)
+  b = b.toString(16)
+  a = Math.round(a * 255).toString(16)
+
+  if (r.length == 1) r = '0' + r
+  if (g.length == 1) g = '0' + g
+  if (b.length == 1) b = '0' + b
+  if (a.length == 1) a = '0' + a
+
+  return '#' + r + g + b + a
 }
 
 const getLValue = hsl => {

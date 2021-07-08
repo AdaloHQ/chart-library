@@ -10,7 +10,14 @@
       "name": "items",
       "displayName": "What is this a chart of?",
       "type": "list",
-      "listControl": {"sort": false}
+      "listControl": {"sort": false, "limit": false}
+    },
+    {
+      "name": "sliceValue",
+      "displayName": "Slice Value",
+      "type": "number",
+      "role": "listItem",
+      "reference": "items"
     },
     {
       "name": "label",
@@ -26,31 +33,26 @@
       "reference": "items"
     },
     {
-      "name": "sliceValue",
-      "displayName": "Slice Value",
-      "type": "number",
-      "role": "listItem",
-      "reference": "items"
-    },
-    {
       "name": "sliceAction",
       "displayName": "Slice Action",
       "type": "action",
       "role": "listItem",
-      "reference": "items"
+      "reference": "items",
+      "helpText": "Click actions are not available for the 'Other' slice"
     },
     {
-      "name": "showPercentages",
+      "name": "prefixMode",
       "displayName": "Show values as percentages",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "name": "chartWidthPercentage",
-      "displayName": "Chart Width (percentage)",
       "type": "number",
-      "default": 50,
-      "control": { "type": "slider", "min": 25, "max": 50 }
+      "default": 0,
+      "control": {
+        "type": "menu",
+        "options": [
+          { "label": "Slice value", "value": 0 },
+          { "label": "Percentage", "value": 1 },
+          { "label": "None", "value": 2 }
+        ]
+      }
     }
   ],
   "childComponents": [
@@ -97,7 +99,7 @@
           "name": "customColor1",
           "displayName": "Slice 1 Color",
           "type": "color",
-          "default": "@primary",
+          "default": "#000000",
           "enabled": {
             "colorScheme": 1
           }
@@ -106,7 +108,7 @@
           "name": "customColor2",
           "displayName": "Slice 2 Color",
           "type": "color",
-          "default": "#757575",
+          "default": "#212121",
           "enabled": {
             "colorScheme": 1
           }
@@ -115,7 +117,7 @@
           "name": "customColor3",
           "displayName": "Slice 3 Color",
           "type": "color",
-          "default": "#9e9e9e",
+          "default": "#424242",
           "enabled": {
             "colorScheme": 1,
             "numberOfSlices": [3, 4, 5, 6]
@@ -125,7 +127,7 @@
           "name": "customColor4",
           "displayName": "Slice 4 Color",
           "type": "color",
-          "default": "#BDBDBD",
+          "default": "#757575",
           "enabled": {
             "colorScheme": 1,
             "numberOfSlices": [4, 5, 6]
@@ -135,7 +137,7 @@
           "name": "customColor5",
           "displayName": "Slice 5 Color",
           "type": "color",
-          "default": "#E0E0E0",
+          "default": "#9e9e9e",
           "enabled": {
             "colorScheme": 1,
             "numberOfSlices": [5, 6]
@@ -145,7 +147,7 @@
           "name": "customColor6",
           "displayName": "Slice 6 Color",
           "type": "color",
-          "default": "#EEEEEE",
+          "default": "#e0e0e0",
           "enabled": {
             "colorScheme": 1,
             "numberOfSlices": 6

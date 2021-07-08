@@ -6,10 +6,7 @@ const PieChart = props => {
   let {
     items,
     slices,
-    // label,
-    // sliceValue,
-    // sliceAction,
-    showPercentages,
+    prefixMode,
     _width,
     _height,
     editor,
@@ -17,6 +14,16 @@ const PieChart = props => {
     styles,
   } = props
   // let {  } = slices
+  chartWidthPercentage = 50
+  let showPercentages = false,
+    showPrefix = true
+
+  if (prefixMode === 1) {
+    showPercentages = true
+  }
+  if (prefixMode === 2) {
+    showPrefix = false
+  }
 
   let {
     colorScheme,
@@ -114,7 +121,7 @@ const PieChart = props => {
     data = []
     for (let i = 0; i < numberOfSlices - 1; i++) {
       let object = {
-        name: `Item ${i + 1}`,
+        name: items[0].label,
         value: (numberOfSlices - i) * 10,
         color: colors[i],
         legendFontColor: labelStyles.color,
@@ -187,6 +194,7 @@ const PieChart = props => {
       hasLegend={legendEnabled}
       avoidFalseZero
       chartWidthPercentage={chartWidthPercentage}
+      showLabelPrefix={showPrefix}
       paddingLeft={16}
     />
     // <Text>Nothing is working</Text>

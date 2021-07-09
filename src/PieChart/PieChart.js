@@ -181,7 +181,6 @@ const PieChart = props => {
     useShadowColorFromDataset: false, // optional
   }
 
-  console.log('render pie', props)
   return (
     <ChartKitPie
       data={data}

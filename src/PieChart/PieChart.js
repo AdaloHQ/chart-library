@@ -181,6 +181,7 @@ const PieChart = props => {
     useShadowColorFromDataset: false, // optional
   }
 
+  console.log('render pie', props)
   return (
     <ChartKitPie
       data={data}
@@ -196,8 +197,8 @@ const PieChart = props => {
       chartWidthPercentage={chartWidthPercentage}
       showLabelPrefix={showPrefix}
       paddingLeft={16}
+      editor={props.editor}
     />
-    // <Text>Nothing is working</Text>
   )
 }
 

@@ -13,6 +13,8 @@ const PieChart = props => {
     chartWidthPercentage,
     styles,
   } = props
+
+  console.log('props', props)
   // let {  } = slices
   chartWidthPercentage = 50
   let showPercentages = false,
@@ -121,7 +123,7 @@ const PieChart = props => {
     data = []
     for (let i = 0; i < numberOfSlices - 1; i++) {
       let object = {
-        name: items[0].label,
+        name: items[0].label ? items[0].label : '',
         value: (numberOfSlices - i) * 10,
         color: colors[i],
         legendFontColor: labelStyles.color,
@@ -132,7 +134,7 @@ const PieChart = props => {
       data.push(object)
     }
     let otherObject = {
-      name: otherSliceLabel,
+      name: otherSliceLabel ? otherSliceLabel : '',
       value: 10,
       color: colors[numberOfSlices - 1],
       legendFontColor: labelStyles.color,

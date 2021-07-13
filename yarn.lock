@@ -39,7 +39,7 @@
 
 "@adalo/react-native-chart-kit@https://github.com/AdaloHQ/react-native-chart-kit.git":
   version "6.11.0"
-  resolved "https://github.com/AdaloHQ/react-native-chart-kit.git#e07512c065851dd4ef9b53b61f0ac3c4d5536c75"
+  resolved "https://github.com/AdaloHQ/react-native-chart-kit.git#294f8bfb742859a40621005d5f13a2969d285cc1"
   dependencies:
     lodash "^4.17.13"
     paths-js "^0.4.10"

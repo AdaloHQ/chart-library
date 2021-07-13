@@ -14,8 +14,6 @@ const PieChart = props => {
     styles,
   } = props
 
-  console.log('props', props)
-  // let {  } = slices
   chartWidthPercentage = 50
   let showPercentages = false,
     showPrefix = true

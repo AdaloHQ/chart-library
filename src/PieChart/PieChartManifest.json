@@ -13,6 +13,20 @@
       "listControl": {"sort": false, "limit": false}
     },
     {
+      "name": "prefixMode",
+      "displayName": "Show value as...",
+      "type": "number",
+      "default": 0,
+      "control": {
+        "type": "menu",
+        "options": [
+          { "label": "Slice value", "value": 0 },
+          { "label": "Percentage", "value": 1 },
+          { "label": "None", "value": 2 }
+        ]
+      }
+    },
+    {
       "name": "sliceValue",
       "displayName": "Slice Value",
       "type": "number",
@@ -39,20 +53,6 @@
       "role": "listItem",
       "reference": "items",
       "helpText": "Click actions are not available for the 'Other' slice"
-    },
-    {
-      "name": "prefixMode",
-      "displayName": "Show values as percentages",
-      "type": "number",
-      "default": 0,
-      "control": {
-        "type": "menu",
-        "options": [
-          { "label": "Slice value", "value": 0 },
-          { "label": "Percentage", "value": 1 },
-          { "label": "None", "value": 2 }
-        ]
-      }
     }
   ],
   "childComponents": [
@@ -75,7 +75,7 @@
         },
         {
           "name": "colorScheme",
-          "displayName": "Color Scheme",
+          "displayName": "Slice Colors",
           "type": "number",
           "default": 0,
           "control": {
@@ -88,7 +88,7 @@
         },
         {
           "name": "monochromaticScheme",
-          "displayName": "Monochromatic Scheme",
+          "displayName": "Main color",
           "type": "color",
           "default": "@primary",
           "enabled": {

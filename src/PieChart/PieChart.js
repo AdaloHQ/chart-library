@@ -15,6 +15,10 @@ const PieChart = props => {
     styles,
   } = props
 
+  if (!items) {
+    return <View width={_width} height={_height}></View>
+  }
+
   let {
     colorScheme,
     monochromaticScheme,
@@ -26,7 +30,7 @@ const PieChart = props => {
     customColor6,
     numberOfSlices,
     otherSliceLabel,
-  } = slices
+  } = items[0].slices
 
   const [data, setData] = useState([])
   // let values = [...items]
@@ -52,9 +56,7 @@ const PieChart = props => {
       otherSlices = [],
       otherValue = 0,
       tempData,
-      otherObject,
-      xOffset = 0,
-      yOffset = 0
+      otherObject
 
     if (colorScheme === 0) {
       //convert color to hsl and then get the light value
@@ -73,7 +75,10 @@ const PieChart = props => {
 
       //create l values for a monochromatic scheme by creating an array of l values based on the base value
       let multiplier = 1
-      const increment = (100 - lValue) / numberOfSlices
+      let increment = (100 - lValue) / numberOfSlices
+      if (increment > 10) {
+        increment = 10
+      }
       for (let i = 0; i < numberOfSlices - 1; i++) {
         lValues.push(lValue + increment * multiplier)
         multiplier += 1
@@ -137,7 +142,7 @@ const PieChart = props => {
           legendFontSize: labelStyles.fontSize,
           legendFontFamily: labelStyles.fontFamily,
           legendFontWeight: labelStyles.fontWeight,
-          action: item.sliceAction,
+          action: item.slices.sliceAction,
         }
       })
     }
@@ -167,8 +172,6 @@ const PieChart = props => {
 
   chartWidthPercentage = 50
 
-  let targetTextWidth = _width - _width * (chartWidthPercentage / 100) - 84
-
   let showPercentages = false,
     showPrefix = true
 
@@ -189,6 +192,7 @@ const PieChart = props => {
     xOffset = _width / 4 - 8
   }
 
+  //These all come from the react native chart kit example
   const chartConfig = {
     backgroundGradientFrom: '#1E2923',
     backgroundGradientFromOpacity: 0,

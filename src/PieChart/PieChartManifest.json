@@ -45,20 +45,14 @@
       },
       "role": "listItem",
       "reference": "items"
-    },
-    {
-      "name": "sliceAction",
-      "displayName": "Slice Action",
-      "type": "action",
-      "role": "listItem",
-      "reference": "items",
-      "helpText": "Click actions are not available for the 'Other' slice"
     }
   ],
   "childComponents": [
     {
       "name": "slices",
       "displayName": "Slices",
+      "role": "listItem",
+      "reference": "items",
       "props": [
         {
           "name": "numberOfSlices",
@@ -152,6 +146,12 @@
             "colorScheme": 1,
             "numberOfSlices": 6
           }
+        },
+        {
+          "name": "sliceAction",
+          "displayName": "Slice Action",
+          "type": "action",
+          "helpText": "Click actions are not available for the 'Other' slice"
         }
       ]
     }

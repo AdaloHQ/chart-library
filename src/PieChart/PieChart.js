@@ -49,9 +49,6 @@ const PieChart = props => {
       }
     }
 
-    // if (!values) {
-    //   return <View></View>
-    // }
     let colors = [],
       otherSlices = [],
       otherValue = 0,

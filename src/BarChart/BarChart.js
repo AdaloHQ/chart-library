@@ -22,7 +22,6 @@ export default class BarChartComponent extends Component {
       width: undefined,
       height: undefined,
     }
-    console.log('bar chart props', props)
   }
 
   onLayout = e => {

@@ -33,7 +33,6 @@ const PieChart = props => {
   } = items[0].slices
 
   const [data, setData] = useState([])
-  // let values = [...items]
   const [valuesState, setValues] = useState([...items])
 
   //Use effect hook that sets the data for teh chart to display
@@ -223,7 +222,6 @@ const PieChart = props => {
         editor={props.editor}
       />
     )
-    // }
   } else {
     return <View width={_width} height={_height}></View>
   }

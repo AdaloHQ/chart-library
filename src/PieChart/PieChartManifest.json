@@ -149,7 +149,7 @@
         },
         {
           "name": "sliceAction",
-          "displayName": "Slice Action",
+          "displayName": "Slice Actions",
           "type": "action",
           "helpText": "Click actions are not available for the 'Other' slice"
         }

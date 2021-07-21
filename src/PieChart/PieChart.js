@@ -72,9 +72,9 @@ const PieChart = props => {
       //create l values for a monochromatic scheme by creating an array of l values based on the base value
       let multiplier = 1
       let increment = (100 - lValue) / numberOfSlices
-      if (increment > 10) {
-        increment = 10
-      }
+      // if (increment > 10) {
+      //   increment = 10
+      // }
       for (let i = 0; i < numberOfSlices - 1; i++) {
         lValues.push(lValue + increment * multiplier)
         multiplier += 1
@@ -115,6 +115,7 @@ const PieChart = props => {
           legendFontSize: labelStyles.fontSize,
           legendFontFamily: labelStyles.fontFamily,
           legendFontWeight: labelStyles.fontWeight,
+          otherSlice: false,
         }
         tempData.push(object)
       }
@@ -126,6 +127,7 @@ const PieChart = props => {
         legendFontSize: labelStyles.fontSize,
         legendFontFamily: labelStyles.fontFamily,
         legendFontWeight: labelStyles.fontWeight,
+        otherSlice: true,
       }
       tempData.push(otherObject)
     } else {
@@ -139,6 +141,7 @@ const PieChart = props => {
           legendFontFamily: labelStyles.fontFamily,
           legendFontWeight: labelStyles.fontWeight,
           action: item.slices.sliceAction,
+          otherSlice: false,
         }
       })
     }
@@ -153,6 +156,7 @@ const PieChart = props => {
         legendFontSize: labelStyles.fontSize,
         legendFontFamily: labelStyles.fontFamily,
         legendFontWeight: labelStyles.fontWeight,
+        otherSlice: true,
       }
       tempData.push(otherObject)
     }

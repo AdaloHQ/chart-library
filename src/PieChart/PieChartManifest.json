@@ -3,7 +3,7 @@
   "defaultWidth": 362,
   "defaultHeight": 218,
   "components": "./PieChart.js",
-  "icon": "./example-thumbnail.png",
+  "icon": "./Pie-Chart-Thumbnail.png",
   "resizeY": true,
   "props": [
     {

@@ -1,0 +1,159 @@
+{
+  "displayName": "Pie Chart",
+  "defaultWidth": 362,
+  "defaultHeight": 218,
+  "components": "./PieChart.js",
+  "icon": "./Pie-Chart-Thumbnail.png",
+  "resizeY": true,
+  "props": [
+    {
+      "name": "items",
+      "displayName": "What is this a chart of?",
+      "type": "list",
+      "listControl": {"sort": false, "limit": false}
+    },
+    {
+      "name": "prefixMode",
+      "displayName": "Show value as...",
+      "type": "number",
+      "default": 0,
+      "control": {
+        "type": "menu",
+        "options": [
+          { "label": "Slice value", "value": 0 },
+          { "label": "Percentage", "value": 1 },
+          { "label": "None", "value": 2 }
+        ]
+      }
+    },
+    {
+      "name": "sliceValue",
+      "displayName": "Slice Value",
+      "type": "number",
+      "role": "listItem",
+      "reference": "items"
+    },
+    {
+      "name": "label",
+      "displayName": "Slice Label",
+      "type": "text",
+      "styles": {
+        "fontFamily": "@body",
+        "color": "@text",
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "role": "listItem",
+      "reference": "items"
+    }
+  ],
+  "childComponents": [
+    {
+      "name": "slices",
+      "displayName": "Slices",
+      "role": "listItem",
+      "reference": "items",
+      "props": [
+        {
+          "name": "numberOfSlices",
+          "displayName": "Maximum Number of Slices",
+          "type": "number",
+          "default": 5,
+          "control": { "type": "slider", "max": 6, "min": 2 }
+        },
+        {
+          "name": "otherSliceLabel",
+          "displayName": "Other Slice Label",
+          "type": "text",
+          "default": "Other"
+        },
+        {
+          "name": "colorScheme",
+          "displayName": "Slice Colors",
+          "type": "number",
+          "default": 0,
+          "control": {
+            "type": "menu",
+            "options": [
+              { "label": "Monochromatic", "value": 0 },
+              { "label": "Custom", "value": 1 }
+            ]
+          }
+        },
+        {
+          "name": "monochromaticScheme",
+          "displayName": "Main color",
+          "type": "color",
+          "default": "@primary",
+          "enabled": {
+            "colorScheme": 0
+          }
+        },
+        {
+          "name": "customColor1",
+          "displayName": "Slice 1 Color",
+          "type": "color",
+          "default": "#757575",
+          "enabled": {
+            "colorScheme": 1
+          }
+        },
+        {
+          "name": "customColor2",
+          "displayName": "Slice 2 Color",
+          "type": "color",
+          "default": "#9C9C9C",
+          "enabled": {
+            "colorScheme": 1
+          }
+        },
+        {
+          "name": "customColor3",
+          "displayName": "Slice 3 Color",
+          "type": "color",
+          "default": "#BBBBBB",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": [3, 4, 5, 6]
+          }
+        },
+        {
+          "name": "customColor4",
+          "displayName": "Slice 4 Color",
+          "type": "color",
+          "default": "#DEDEDE",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": [4, 5, 6]
+          }
+        },
+        {
+          "name": "customColor5",
+          "displayName": "Slice 5 Color",
+          "type": "color",
+          "default": "#ECECEC",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": [5, 6]
+          }
+        },
+        {
+          "name": "customColor6",
+          "displayName": "Slice 6 Color",
+          "type": "color",
+          "default": "#F3F3F3",
+          "enabled": {
+            "colorScheme": 1,
+            "numberOfSlices": 6
+          }
+        },
+        {
+          "name": "sliceAction",
+          "displayName": "Slice Actions",
+          "type": "action",
+          "helpText": "Click actions are not available for the 'Other' slice"
+        }
+      ]
+    }
+  ]
+}

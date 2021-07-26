@@ -1,6 +1,6 @@
 {
   "name": "@protonapp/barchart-component",
-  "version": "0.1.15",
+  "version": "0.2.17",
   "description": "Chart Components Component for Foundry",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,10 @@
       {
         "name": "LineChart",
         "manifest": "./src/LineChart/LineChartManifest.json"
+      },
+      {
+        "name": "PieChart",
+        "manifest": "./src/PieChart/PieChartManifest.json"
       }
     ]
   },
@@ -59,7 +63,9 @@
   },
   "dependencies": {
     "@adalo/cli": "^0.0.42",
+    "@adalo/react-native-chart-kit": "https://github.com/AdaloHQ/react-native-chart-kit.git",
     "react-native-svg": "9.13.3",
+    "rfdc": "^1.3.0",
     "victory-native": "^32.0.2"
   }
 }

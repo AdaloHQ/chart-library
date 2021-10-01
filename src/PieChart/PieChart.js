@@ -35,7 +35,7 @@ const PieChart = props => {
   const [data, setData] = useState([])
   const [valuesState, setValues] = useState([...items])
 
-  //Use effect hook that sets the data for teh chart to display
+  //Use effect hook that sets the data for the chart to display
   useEffect(() => {
     let values = [...valuesState]
     let labelStyles = {}
@@ -90,6 +90,8 @@ const PieChart = props => {
       colors.push(customColor5)
       colors.push(customColor6)
     }
+
+    values = values.filter(a => editor || a.sliceValue)
 
     values.sort((a, b) => (a.sliceValue < b.sliceValue ? 1 : -1))
 

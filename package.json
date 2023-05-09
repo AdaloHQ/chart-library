@@ -13,7 +13,7 @@
     "copy": "rm -rf ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/src/ && cp -r src ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/src && cp -r index.js ../../../Builds/TestApp2/node_modules/@protonapp/barchart-component/index.js",
     "prettier": "prettier --write './**'"
   },
-  "author": "Kedar Bell",
+  "author": "Adalo",
   "license": "ISC",
   "peerDependencies": {
     "react": ">=16",

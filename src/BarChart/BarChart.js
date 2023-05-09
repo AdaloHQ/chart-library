@@ -1,8 +1,6 @@
 //import Icon from "./_laska_/Icon";
 import React, { Component } from 'react'
-
 import { View, Platform } from 'react-native'
-
 import {
   VictoryBar,
   VictoryChart,
@@ -227,9 +225,17 @@ export default class BarChartComponent extends Component {
       }
     }
 
+    const defaultContainerProps = {
+      style: {
+        flex: 1,
+        alignSelf: 'stretch',
+      },
+      onLayout: this.onLayout,
+    }
+
     if (this.state.width && !!barchartdesc) {
       return (
-        <View>
+        <View {...defaultContainerProps}>
           <Svg
             viewBox={'0 0' + ' ' + this.state.width + ' ' + height}
             preserveAspectRatio="none"
@@ -373,11 +379,7 @@ export default class BarChartComponent extends Component {
         </View>
       )
     }
-    return (
-      <View
-        style={{ flex: 1, alignSelf: 'stretch' }}
-        onLayout={this.onLayout}
-      ></View>
-    )
+
+    return <View {...defaultContainerProps}></View>
   }
 }

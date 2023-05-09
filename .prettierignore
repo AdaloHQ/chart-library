@@ -1,0 +1,37 @@
+# Unsupported filetypes
+*.gif
+*.ico
+*.lock
+*.log
+*.png
+*.jpg
+*.jpeg
+*.snap
+*.sh
+*.svg
+*.tf
+*.toml
+*.woff
+*.woff2
+.env*
+.gitignore
+.htaccess
+.npmrc
+.nvmrc
+.prettierignore
+
+# Tooling output
+/build
+/coverage
+/node_modules
+
+# Third-party code
+/public/sf-pro-text/stylesheet.css
+/src/components/Editor/Analytics/Modules/world-110m.json
+/src/components/Shared/TrialWarning/integrationTrialSuccess/party.json
+
+# Legacy code that is not yet formatted with prettier.
+# It would be reasonable to format these items and remove the ignore rules.
+/public/index.html
+/src/**/*.css
+CODEOWNERS

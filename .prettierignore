@@ -35,3 +35,4 @@
 /public/index.html
 /src/**/*.css
 CODEOWNERS
+dist/

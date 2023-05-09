@@ -1,15 +1,10 @@
-//import Icon from "./_laska_/Icon";
 import React, { Component } from 'react'
-
 import { View, Platform } from 'react-native'
-
 import {
   VictoryLine,
   VictoryChart,
-  VictoryScatter,
   VictoryAxis,
   VictoryLabel,
-  VictoryPortal,
   VictoryClipContainer,
 } from 'victory-native'
 
@@ -238,9 +233,18 @@ export default class LineChartComponent extends Component {
         data.push({ x: variables.xaxis, y: variables.yaxis })
       }
     }
+
+    const defaultContainerProps = {
+      style: {
+        flex: 1,
+        alignSelf: 'stretch',
+      },
+      onLayout: this.onLayout,
+    }
+
     if (this.state.width && !!linechartdesc) {
       return (
-        <View>
+        <View {...defaultContainerProps}>
           <Svg
             viewBox={'0 0' + ' ' + this.state.width + ' ' + height}
             preserveAspectRatio="none"
@@ -374,11 +378,7 @@ export default class LineChartComponent extends Component {
         </View>
       )
     }
-    return (
-      <View
-        style={{ flex: 1, alignSelf: 'stretch' }}
-        onLayout={this.onLayout}
-      ></View>
-    )
+
+    return <View {...defaultContainerProps}></View>
   }
 }

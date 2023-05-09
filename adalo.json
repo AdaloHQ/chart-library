@@ -1,0 +1,20 @@
+{
+  "author": "Adalo",
+  "description": "Chart Components Component for Foundry",
+  "logo": "./bar-chart-logo.png",
+  "displayName": "Charts",
+  "components": [
+    {
+      "name": "BarChart",
+      "manifest": "./src/BarChart/BarChartManifest.json"
+    },
+    {
+      "name": "LineChart",
+      "manifest": "./src/LineChart/LineChartManifest.json"
+    },
+    {
+      "name": "PieChart",
+      "manifest": "./src/PieChart/PieChartManifest.json"
+    }
+  ]
+}

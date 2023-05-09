@@ -10,7 +10,7 @@
       "name": "items",
       "displayName": "What is this a chart of?",
       "type": "list",
-      "listControl": {"sort": false, "limit": false}
+      "listControl": { "sort": false, "limit": false }
     },
     {
       "name": "prefixMode",

@@ -245,7 +245,7 @@ const hexToHSL = hex => {
   b = '0x' + hex[5] + hex[6]
 
   //get alpha
-  if (hex.length == 9) {
+  if (hex.length === 9) {
     a = '0x' + hex[7] + hex[8]
   }
 
@@ -312,10 +312,10 @@ const rgbaToHex = rgba => {
   b = b.toString(16)
   a = Math.round(a * 255).toString(16)
 
-  if (r.length == 1) r = '0' + r
-  if (g.length == 1) g = '0' + g
-  if (b.length == 1) b = '0' + b
-  if (a.length == 1) a = '0' + a
+  if (r.length === 1) r = '0' + r
+  if (g.length === 1) g = '0' + g
+  if (b.length === 1) b = '0' + b
+  if (a.length === 1) a = '0' + a
 
   return '#' + r + g + b + a
 }

@@ -276,7 +276,7 @@ const hexToHSL = hex => {
   }
 
   l = (maxColor + minColor) / 2
-  s = diff == 0 ? 0 : diff / (1 - Math.abs(2 * l - 1))
+  s = diff === 0 ? 0 : diff / (1 - Math.abs(2 * l - 1))
   s = +(s * 100).toFixed(1)
   l = +(l * 100).toFixed(1)
 

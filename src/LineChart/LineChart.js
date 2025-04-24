@@ -149,7 +149,7 @@ export default class LineChartComponent extends Component {
             />
             <VictoryAxis
               tickFormat={t => {
-                if (data.length == 2) {
+                if (data.length === 2) {
                   if (t.length > 24) {
                     return t.substring(0, 25)
                   }
@@ -304,7 +304,7 @@ export default class LineChartComponent extends Component {
               />
               <VictoryAxis
                 tickFormat={t => {
-                  if (data.length == 2) {
+                  if (data.length === 2) {
                     if (t.length > 24) {
                       return t.substring(0, 25)
                     }

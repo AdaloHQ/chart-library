@@ -176,7 +176,7 @@ export default class LineChartComponent extends Component {
                       return 'middle'
                     }
 
-                    if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                    if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                       return 'start'
                     }
                     return 'middle'
@@ -186,7 +186,7 @@ export default class LineChartComponent extends Component {
                       return 0
                     }
 
-                    if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                    if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                       return 20
                     }
                     return 0
@@ -330,7 +330,7 @@ export default class LineChartComponent extends Component {
                         return 'middle'
                       }
 
-                      if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                      if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                         return 'start'
                       }
                       return 'middle'
@@ -340,7 +340,7 @@ export default class LineChartComponent extends Component {
                         return 0
                       }
 
-                      if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                      if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                         return 20
                       }
                       return 0

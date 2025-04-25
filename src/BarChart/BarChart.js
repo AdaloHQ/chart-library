@@ -167,7 +167,7 @@ export default class BarChartComponent extends Component {
                       return 'middle'
                     }
 
-                    if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                    if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                       return 'start'
                     }
                     // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
@@ -179,7 +179,7 @@ export default class BarChartComponent extends Component {
                       return 0
                     }
 
-                    if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                    if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                       return 20
                     }
                     return 0
@@ -319,7 +319,7 @@ export default class BarChartComponent extends Component {
                         return 'middle'
                       }
 
-                      if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                      if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                         return 'start'
                       }
                       // if((data[d-1].x.length)>= ((68 - (Math.pow(2,(data.length-2)) ))/data.length)) { return "start" }
@@ -331,7 +331,7 @@ export default class BarChartComponent extends Component {
                         return 0
                       }
 
-                      if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                      if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                         return 20
                       }
                       return 0

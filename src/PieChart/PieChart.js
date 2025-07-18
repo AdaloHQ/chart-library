@@ -3,6 +3,8 @@ import { PieChart as ChartKitPie } from '@adalo/react-native-chart-kit'
 import { View, Text } from 'react-native'
 import clone from 'rfdc/default'
 
+const ARGB_HEX_LENGTH = 9
+
 const PieChart = props => {
   let {
     items,
@@ -245,7 +247,7 @@ const hexToHSL = hex => {
   b = '0x' + hex[5] + hex[6]
 
   //get alpha
-  if (hex.length === 9) {
+  if (hex.length === ARGB_HEX_LENGTH) {
     a = '0x' + hex[7] + hex[8]
   }
 

@@ -78,11 +78,11 @@ export default class LineChartComponent extends Component {
 
     if (editor) {
       data = [
-        { x: linechartdesc[0].xaxis + '1', y: 2 },
-        { x: linechartdesc[0].xaxis + '2', y: 3 },
-        { x: linechartdesc[0].xaxis + '3', y: 5 },
-        { x: linechartdesc[0].xaxis + '4', y: 4 },
-        { x: linechartdesc[0].xaxis + '5', y: 7 },
+        { x: linechartdesc[0].xaxis + '1', y: 2, label: 2},
+        { x: linechartdesc[0].xaxis + '2', y: 3, label: 3},
+        { x: linechartdesc[0].xaxis + '3', y: 5, label: 5},
+        { x: linechartdesc[0].xaxis + '4', y: 4, label: 4},
+        { x: linechartdesc[0].xaxis + '5', y: 7, label: 7},
       ]
       max = data.reduce((prev, current) =>
         prev.y > current.y ? prev : current
@@ -229,8 +229,11 @@ export default class LineChartComponent extends Component {
       data = []
       for (let i = 0; i < linechartdesc.length; ++i) {
         let variables = linechartdesc[i]
-
-        data.push({ x: variables.xaxis, y: variables.yaxis })
+        data.push({
+          x: variables.xaxis,
+          y: variables.yaxis,
+          label: variables.yaxis,
+        })
       }
     }
 

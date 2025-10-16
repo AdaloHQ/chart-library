@@ -22,12 +22,6 @@ export default class LineChartComponent extends Component {
     }
   }
 
-  onLayout = e => {
-    this.setState({
-      width: e.nativeEvent.layout.width,
-    })
-  }
-
   render() {
     let data = [
       { x: '0', y: 0 },
@@ -242,14 +236,13 @@ export default class LineChartComponent extends Component {
         flex: 1,
         alignSelf: 'stretch',
       },
-      onLayout: this.onLayout,
     }
 
-    if (this.state.width && !!linechartdesc) {
+    if (width && height && !!linechartdesc) {
       return (
         <View {...defaultContainerProps}>
           <Svg
-            viewBox={'0 0' + ' ' + this.state.width + ' ' + height}
+            viewBox={'0 0' + ' ' + width + ' ' + height}
             preserveAspectRatio="none"
             width="100%"
             height={height}
@@ -257,7 +250,7 @@ export default class LineChartComponent extends Component {
             <VictoryChart
               domainPadding={{ x: 40 }}
               standalone={false}
-              width={this.state.width}
+              width={width}
               minDomain={{ y: 0 }}
               height={height}
             >

@@ -191,6 +191,8 @@ const PieChart = props => {
     legendEnabled = false
   }
 
+  let xOffset = 0,
+    yOffset = 0
   //center the chart if the legend is turned off
   if (!legendEnabled) {
     xOffset = _width / 4 - 8
@@ -207,9 +209,6 @@ const PieChart = props => {
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
   }
-
-  let xOffset = 0,
-    yOffset = 0
 
   if (data.length > 0) {
     return (

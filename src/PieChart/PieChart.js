@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PieChart as ChartKitPie } from '@adalo/react-native-chart-kit'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import clone from 'rfdc/default'
 
 const ARGB_HEX_LENGTH = 9
@@ -61,13 +61,14 @@ const PieChart = props => {
       //create an array of light values that will be used for the colors of the scheme
 
       if (monochromaticScheme) {
-        let isHex = monochromaticScheme[0] === '#'
-        if (!isHex) {
+        let isRgba = monochromaticScheme.startsWith('rgba')
+        if (isRgba) {
           monochromaticScheme = rgbaToHex(monochromaticScheme)
         }
       }
+      let isHex = monochromaticScheme[0] === '#'
 
-      let hslBase = hexToHSL(monochromaticScheme),
+      let hslBase = isHex ? hexToHSL(monochromaticScheme) : monochromaticScheme,
         lValue = getLValue(hslBase),
         lValues = [lValue]
 
@@ -210,7 +211,7 @@ const PieChart = props => {
     useShadowColorFromDataset: false, // optional
   }
 
-  if (data.length > 0) {
+  if (data.length > 0 && _width && _height) {
     return (
       <ChartKitPie
         data={[...data]}
@@ -352,4 +353,14 @@ const compareItemsArrays = (a, b) => {
   )
 }
 
-export default PieChart
+const arePropsEqual = (prevProps, nextProps) => {
+  const itemsSame = prevProps.items && nextProps.items && compareItemsArrays(prevProps.items, nextProps.items)
+  const widthSame = prevProps._width === nextProps._width
+  const heightSame = prevProps._height === nextProps._height
+  const prefixSame = prevProps.prefixMode === nextProps.prefixMode
+  const editorSame = prevProps.editor === nextProps.editor
+  const stylesSame = JSON.stringify(prevProps.styles) === JSON.stringify(nextProps.styles)
+  return itemsSame && widthSame && heightSame && prefixSame && editorSame && stylesSame
+}
+
+export default React.memo(PieChart, arePropsEqual)

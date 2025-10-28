@@ -22,6 +22,28 @@ export default class LineChartComponent extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const changedProps = {};
+    Object.keys(nextProps).forEach(key => {
+      const prev = this.props[key];
+      const next = nextProps[key];
+
+      if (typeof prev === 'object' && prev !== null) {
+        if (JSON.stringify(prev) !== JSON.stringify(next)) {
+          changedProps[key] = { prev, next };
+        }
+      } else if (prev !== next) {
+        changedProps[key] = { prev, next };
+      }
+    });
+
+    const stateChanged =
+      this.state.width !== nextState.width || this.state.height !== nextState.height;
+
+    return Object.keys(changedProps).length > 0 || stateChanged;
+  }
+
+
   render() {
     let data = [
       { x: '0', y: 0 },

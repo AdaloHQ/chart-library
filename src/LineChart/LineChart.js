@@ -22,27 +22,32 @@ export default class LineChartComponent extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const changedProps = {};
-    Object.keys(nextProps).forEach(key => {
-      const prev = this.props[key];
-      const next = nextProps[key];
+  shouldComponentUpdate(nextProps) {
+    const keysToCheck = [
+      'linechartdesc',
+      'linechartstyles',
+      'editor',
+      '_fonts',
+      '_width',
+      '_height',
+    ]
+    const changedProps = {}
+
+    keysToCheck.forEach(key => {
+      const prev = this.props[key]
+      const next = nextProps[key]
 
       if (typeof prev === 'object' && prev !== null) {
         if (JSON.stringify(prev) !== JSON.stringify(next)) {
-          changedProps[key] = { prev, next };
+          changedProps[key] = { prev, next }
         }
       } else if (prev !== next) {
-        changedProps[key] = { prev, next };
+        changedProps[key] = { prev, next }
       }
-    });
+    })
 
-    const stateChanged =
-      this.state.width !== nextState.width || this.state.height !== nextState.height;
-
-    return Object.keys(changedProps).length > 0 || stateChanged;
+    return Object.keys(changedProps).length > 0
   }
-
 
   render() {
     let data = [
@@ -94,11 +99,11 @@ export default class LineChartComponent extends Component {
 
     if (editor) {
       data = [
-        { x: linechartdesc[0].xaxis + '1', y: 2, label: 2},
-        { x: linechartdesc[0].xaxis + '2', y: 3, label: 3},
-        { x: linechartdesc[0].xaxis + '3', y: 5, label: 5},
-        { x: linechartdesc[0].xaxis + '4', y: 4, label: 4},
-        { x: linechartdesc[0].xaxis + '5', y: 7, label: 7},
+        { x: linechartdesc[0].xaxis + '1', y: 2, label: 2 },
+        { x: linechartdesc[0].xaxis + '2', y: 3, label: 3 },
+        { x: linechartdesc[0].xaxis + '3', y: 5, label: 5 },
+        { x: linechartdesc[0].xaxis + '4', y: 4, label: 4 },
+        { x: linechartdesc[0].xaxis + '5', y: 7, label: 7 },
       ]
       max = data.reduce((prev, current) =>
         prev.y > current.y ? prev : current

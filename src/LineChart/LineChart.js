@@ -109,6 +109,8 @@ export default class LineChartComponent extends Component {
         prev.y > current.y ? prev : current
       )
 
+      const showLabels = linechartstyles && linechartstyles.toggle_label
+
       return (
         <Svg
           viewBox={'0 0' + ' ' + width + ' ' + height}
@@ -229,13 +231,10 @@ export default class LineChartComponent extends Component {
                 labels: { fontFamily: fontFamily },
               }}
               data={data}
-              labels={d => {
-                if (linechartstyles.toggle_label) {
-                  return d.y
-                }
-                return ''
-              }}
-              labelComponent={<VictoryLabel dy={15} />}
+              labels={showLabels ? d => d.y : undefined}
+              labelComponent={
+                showLabels ? <VictoryLabel dy={15} /> : <></>
+              }
             />
           </VictoryChart>
         </Svg>
@@ -266,6 +265,8 @@ export default class LineChartComponent extends Component {
     }
 
     if (width && height && !!linechartdesc) {
+      const showLabels = linechartstyles && linechartstyles.toggle_label
+
       return (
         <View {...defaultContainerProps}>
           <Svg
@@ -388,13 +389,10 @@ export default class LineChartComponent extends Component {
                 groupComponent={
                   <VictoryClipContainer clipPadding={{ top: 10, bottom: 10 }} />
                 }
-                labels={d => {
-                  if (linechartstyles.toggle_label) {
-                    return d.y
-                  }
-                  return ''
-                }}
-                labelComponent={<VictoryLabel dy={15} />}
+                labels={showLabels ? d => d.y : undefined}
+                labelComponent={
+                  showLabels ? <VictoryLabel dy={15} /> : <></>
+                }
               />
             </VictoryChart>
           </Svg>

@@ -22,10 +22,31 @@ export default class LineChartComponent extends Component {
     }
   }
 
-  onLayout = e => {
-    this.setState({
-      width: e.nativeEvent.layout.width,
+  shouldComponentUpdate(nextProps) {
+    const keysToCheck = [
+      'linechartdesc',
+      'linechartstyles',
+      'editor',
+      '_fonts',
+      '_width',
+      '_height',
+    ]
+    const changedProps = {}
+
+    keysToCheck.forEach(key => {
+      const prev = this.props[key]
+      const next = nextProps[key]
+
+      if (typeof prev === 'object' && prev !== null) {
+        if (JSON.stringify(prev) !== JSON.stringify(next)) {
+          changedProps[key] = { prev, next }
+        }
+      } else if (prev !== next) {
+        changedProps[key] = { prev, next }
+      }
     })
+
+    return Object.keys(changedProps).length > 0
   }
 
   render() {
@@ -78,15 +99,17 @@ export default class LineChartComponent extends Component {
 
     if (editor) {
       data = [
-        { x: linechartdesc[0].xaxis + '1', y: 2 },
-        { x: linechartdesc[0].xaxis + '2', y: 3 },
-        { x: linechartdesc[0].xaxis + '3', y: 5 },
-        { x: linechartdesc[0].xaxis + '4', y: 4 },
-        { x: linechartdesc[0].xaxis + '5', y: 7 },
+        { x: linechartdesc[0].xaxis + '1', y: 2, label: 2 },
+        { x: linechartdesc[0].xaxis + '2', y: 3, label: 3 },
+        { x: linechartdesc[0].xaxis + '3', y: 5, label: 5 },
+        { x: linechartdesc[0].xaxis + '4', y: 4, label: 4 },
+        { x: linechartdesc[0].xaxis + '5', y: 7, label: 7 },
       ]
       max = data.reduce((prev, current) =>
         prev.y > current.y ? prev : current
       )
+
+      const showLabels = linechartstyles && linechartstyles.toggle_label
 
       return (
         <Svg
@@ -149,7 +172,7 @@ export default class LineChartComponent extends Component {
             />
             <VictoryAxis
               tickFormat={t => {
-                if (data.length == 2) {
+                if (data.length === 2) {
                   if (t.length > 24) {
                     return t.substring(0, 25)
                   }
@@ -176,7 +199,7 @@ export default class LineChartComponent extends Component {
                       return 'middle'
                     }
 
-                    if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                    if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                       return 'start'
                     }
                     return 'middle'
@@ -186,7 +209,7 @@ export default class LineChartComponent extends Component {
                       return 0
                     }
 
-                    if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                    if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                       return 20
                     }
                     return 0
@@ -208,13 +231,10 @@ export default class LineChartComponent extends Component {
                 labels: { fontFamily: fontFamily },
               }}
               data={data}
-              labels={d => {
-                if (linechartstyles.toggle_label) {
-                  return d.y
-                }
-                return ''
-              }}
-              labelComponent={<VictoryLabel dy={15} />}
+              labels={showLabels ? d => d.y : undefined}
+              labelComponent={
+                showLabels ? <VictoryLabel dy={15} /> : <></>
+              }
             />
           </VictoryChart>
         </Svg>
@@ -229,8 +249,11 @@ export default class LineChartComponent extends Component {
       data = []
       for (let i = 0; i < linechartdesc.length; ++i) {
         let variables = linechartdesc[i]
-
-        data.push({ x: variables.xaxis, y: variables.yaxis })
+        data.push({
+          x: variables.xaxis,
+          y: variables.yaxis,
+          label: variables.yaxis,
+        })
       }
     }
 
@@ -239,14 +262,15 @@ export default class LineChartComponent extends Component {
         flex: 1,
         alignSelf: 'stretch',
       },
-      onLayout: this.onLayout,
     }
 
-    if (this.state.width && !!linechartdesc) {
+    if (width && height && !!linechartdesc) {
+      const showLabels = linechartstyles && linechartstyles.toggle_label
+
       return (
         <View {...defaultContainerProps}>
           <Svg
-            viewBox={'0 0' + ' ' + this.state.width + ' ' + height}
+            viewBox={'0 0' + ' ' + width + ' ' + height}
             preserveAspectRatio="none"
             width="100%"
             height={height}
@@ -254,7 +278,7 @@ export default class LineChartComponent extends Component {
             <VictoryChart
               domainPadding={{ x: 40 }}
               standalone={false}
-              width={this.state.width}
+              width={width}
               minDomain={{ y: 0 }}
               height={height}
             >
@@ -304,7 +328,7 @@ export default class LineChartComponent extends Component {
               />
               <VictoryAxis
                 tickFormat={t => {
-                  if (data.length == 2) {
+                  if (data.length === 2) {
                     if (t.length > 24) {
                       return t.substring(0, 25)
                     }
@@ -330,7 +354,7 @@ export default class LineChartComponent extends Component {
                         return 'middle'
                       }
 
-                      if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                      if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                         return 'start'
                       }
                       return 'middle'
@@ -340,7 +364,7 @@ export default class LineChartComponent extends Component {
                         return 0
                       }
 
-                      if (data[d - 1].x.length > 11 - 2 * (data.length - 3)) {
+                      if (data[d.index].x.length > 11 - 2 * (data.length - 3)) {
                         return 20
                       }
                       return 0
@@ -365,13 +389,10 @@ export default class LineChartComponent extends Component {
                 groupComponent={
                   <VictoryClipContainer clipPadding={{ top: 10, bottom: 10 }} />
                 }
-                labels={d => {
-                  if (linechartstyles.toggle_label) {
-                    return d.y
-                  }
-                  return ''
-                }}
-                labelComponent={<VictoryLabel dy={15} />}
+                labels={showLabels ? d => d.y : undefined}
+                labelComponent={
+                  showLabels ? <VictoryLabel dy={15} /> : <></>
+                }
               />
             </VictoryChart>
           </Svg>

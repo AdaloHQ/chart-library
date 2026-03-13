@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { PieChart as ChartKitPie } from '@adalo/react-native-chart-kit'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import clone from 'rfdc/default'
+
+const ARGB_HEX_LENGTH = 9
 
 const PieChart = props => {
   let {
@@ -59,13 +61,14 @@ const PieChart = props => {
       //create an array of light values that will be used for the colors of the scheme
 
       if (monochromaticScheme) {
-        let isHex = monochromaticScheme[0] === '#'
-        if (!isHex) {
+        let isRgba = monochromaticScheme.startsWith('rgba')
+        if (isRgba) {
           monochromaticScheme = rgbaToHex(monochromaticScheme)
         }
       }
+      let isHex = monochromaticScheme[0] === '#'
 
-      let hslBase = hexToHSL(monochromaticScheme),
+      let hslBase = isHex ? hexToHSL(monochromaticScheme) : monochromaticScheme,
         lValue = getLValue(hslBase),
         lValues = [lValue]
 
@@ -189,6 +192,8 @@ const PieChart = props => {
     legendEnabled = false
   }
 
+  let xOffset = 0,
+    yOffset = 0
   //center the chart if the legend is turned off
   if (!legendEnabled) {
     xOffset = _width / 4 - 8
@@ -206,10 +211,7 @@ const PieChart = props => {
     useShadowColorFromDataset: false, // optional
   }
 
-  let xOffset = 0,
-    yOffset = 0
-
-  if (data.length > 0) {
+  if (data.length > 0 && _width && _height) {
     return (
       <ChartKitPie
         data={[...data]}
@@ -245,7 +247,7 @@ const hexToHSL = hex => {
   b = '0x' + hex[5] + hex[6]
 
   //get alpha
-  if (hex.length == 9) {
+  if (hex.length === ARGB_HEX_LENGTH) {
     a = '0x' + hex[7] + hex[8]
   }
 
@@ -276,7 +278,7 @@ const hexToHSL = hex => {
   }
 
   l = (maxColor + minColor) / 2
-  s = diff == 0 ? 0 : diff / (1 - Math.abs(2 * l - 1))
+  s = diff === 0 ? 0 : diff / (1 - Math.abs(2 * l - 1))
   s = +(s * 100).toFixed(1)
   l = +(l * 100).toFixed(1)
 
@@ -312,10 +314,10 @@ const rgbaToHex = rgba => {
   b = b.toString(16)
   a = Math.round(a * 255).toString(16)
 
-  if (r.length == 1) r = '0' + r
-  if (g.length == 1) g = '0' + g
-  if (b.length == 1) b = '0' + b
-  if (a.length == 1) a = '0' + a
+  if (r.length === 1) r = '0' + r
+  if (g.length === 1) g = '0' + g
+  if (b.length === 1) b = '0' + b
+  if (a.length === 1) a = '0' + a
 
   return '#' + r + g + b + a
 }
@@ -351,4 +353,14 @@ const compareItemsArrays = (a, b) => {
   )
 }
 
-export default PieChart
+const arePropsEqual = (prevProps, nextProps) => {
+  const itemsSame = prevProps.items && nextProps.items && compareItemsArrays(prevProps.items, nextProps.items)
+  const widthSame = prevProps._width === nextProps._width
+  const heightSame = prevProps._height === nextProps._height
+  const prefixSame = prevProps.prefixMode === nextProps.prefixMode
+  const editorSame = prevProps.editor === nextProps.editor
+  const stylesSame = JSON.stringify(prevProps.styles) === JSON.stringify(nextProps.styles)
+  return itemsSame && widthSame && heightSame && prefixSame && editorSame && stylesSame
+}
+
+export default React.memo(PieChart, arePropsEqual)
